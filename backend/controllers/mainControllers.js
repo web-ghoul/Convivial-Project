@@ -1,4 +1,5 @@
-const Email = require("../models/emailSchema");
+const PDF = require("../models/pdfSchema");
+const Hotel = require("../models/hotelSchema")
 require("dotenv").config();
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
@@ -6,6 +7,7 @@ const nodemailer = require("nodemailer");
 const cookieParser = require("cookie-parser");
 const moment = require("moment");
 const validator = require("validator");
+const { exec } = require('child_process');
 
 const transporter = nodemailer.createTransport({
   name: process.env.AUTH_HOST,
@@ -1310,16 +1312,13 @@ const sendEmail = asyncHandler(async (req, res, next) => {
 
 const displayLogs = asyncHandler(async (req, res, next) => {
   try {
-    const count = await Email.countDocuments({});
-    const data = await Email.find()
+    const data = await PDF.find("HotelsName")
       .sort({ createdAt: -1 })
-      .skip(req.query.page*10 || 0)
-      .limit(10);
-    //console.log(data);
-    res.render("../view/index.ejs", { data: data,count:Math.ceil(count/10), page: req.query.page });
-    // return res.status(200).json({
-    //   data : data
-    // })
+      .skip(parseInt(req.query.page)*20 || 0)
+      .limit(20);
+    return res.status(200).json({
+      data : data 
+    })
   } catch (err) {
     //console.log(err);
     return res.status(404).json({
@@ -1332,52 +1331,84 @@ const login = asyncHandler(async (req, res, next) => {
   const { Password } = req.body;
   //console.log(req.body);
   if (Password == process.env.SECRET_PASS) {
-    let token = jwt.sign({}, process.env.SECRET_KEY, {
-      expiresIn: "30h",
+    let token = jwt.sign(
+      process.env.SECRET_KEY,
+      {
+        expiresIn: "30h",
+      }
+    );
+    const expirationDate = new Date();
+    expirationDate.setTime(
+      expirationDate.getTime() + 30 * 60 * 60 * 1000
+    );
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      expires: expirationDate,
     });
-    //console.log(token);
-    res.cookie("token", token);
-    res.redirect("/");
+ 
+    return res.status(200).json({
+      message: "login successfully !",
+      token: token,
+    });
   } else {
-    res.render("../view/login.ejs");
+    return res.status(404).json({
+      message: "Wrong Username or Password",
+    });
   }
 });
 
-const search = asyncHandler(async (req, res, next) => {
-  const { search } = req.body;
-  const count = await Email.countDocuments({});
-
-  if (search) {
-    const data = await Email.aggregate([
-      {
-        $search: {
-          index: "search",
-          text: {
-            query: search,
-            path: {
-              wildcard: "*",
-            },
-            fuzzy: {},
-          },
-        },
-      },
-      {
-        $sort: {
-          createdAt: -1,
-          score: -1, // Sort by the 'score' field in descending order
-        },
-      },
-    ]);
+const searchHotels = asyncHandler(async (req, res, next) => {
+  const { search } = req.query;
+  if(search){
+  try{
+    const searchData = await Hotel.find(
+      { $text: { $search: search } },
+      { score: { $meta: 'textScore' } }
+    )
+    .sort({ score: { $meta: 'textScore' } })
+    .limit(20)
+    
+    return res.status(200).json({
+      data : searchData
+    })
+  }catch(err)
+  {
+    return res.status(404).json({
+      message : "Error while searching"
+    })
+  }
+  
+  // if (search) {
+  //   const data = await Email.aggregate([
+  //     {
+  //       $search: {
+  //         index: "search",
+  //         text: {
+  //           query: search,
+  //           path: {
+  //             wildcard: "*",
+  //           },
+  //           fuzzy: {},
+  //         },
+  //       },
+  //     },
+  //     {
+  //       $sort: {
+  //         createdAt: -1,
+  //         score: -1, // Sort by the 'score' field in descending order
+  //       },
+  //     },
+  //   ]);
 
     // return res.status(200).json({
     //   data : data
     // })
 
-    res.render("../view/index.ejs", { data: data,count:Math.ceil(count/10) , page : "0"});
+   
   } else {
-    const data = await Email.find().sort({ createdAt: -1 }).limit(10);
-    //console.log(data)
-    res.render("../view/index.ejs", { data: data,count:Math.ceil(count/10) , page : "0"});
+    
   }
 });
 
@@ -1403,10 +1434,85 @@ const filter = asyncHandler(async (req, res) => {
   }
 });
 
+const scrape = asyncHandler(async (req,res) => {
+  
+  const { site } = req.query;
+
+    exec(`python ./script.py "${site}"`, async(error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error: ${error.message}`);
+            return res.status(500).send('Error occurred while running the script.');
+        }
+        if (stderr) {
+            console.error(`Script Error: ${stderr}`);
+            return res.status(500).send('Error occurred while running the script.');
+        }
+        // Assuming the script outputs the data you want to store in the database
+        const outputData = stdout.trim(); // Trim any whitespace
+        console.log(outputData)
+        
+        const correctedJsonString = outputData.replace(/'/g, '"');
+ 
+        const jsonObject = JSON.parse(correctedJsonString);
+        try{
+          const newHotel = new Hotel(jsonObject)
+          const data = await newHotel.save();
+          return res.status(200).json({
+            data : data
+          })
+        }catch(err)
+        {
+          return res.status(404).json({
+            message : "Error while scraping !"
+          })
+        }
+        
+
+        
+        // Code to store 'outputData' in MongoDB
+        // Insert it into the relevant collection
+        // Example:
+        // YourModel.create({ data: outputData }, (err, result) => {
+        //     if (err) {
+        //         console.error('Error storing data in MongoDB:', err);
+        //         return res.status(500).send('Error storing data in MongoDB.');
+        //     }
+        //     res.send('Data stored successfully in MongoDB.');
+        // });
+    });
+
+}
+)
+
+const searchLogs = asyncHandler(async (req,res) => {
+  
+
+}
+)
+
+const deletePDF = asyncHandler(async (req,res) => {
+  
+}
+)
+
+const addPDF = asyncHandler(async (req,res) => {
+    
+}
+)
+const editPDF = asyncHandler(async (req,res) => {
+  
+}
+)
 module.exports = {
   sendEmail,
   displayLogs,
   login,
-  search,
+  searchHotels,
   filter,
+  scrape,
+  searchLogs,
+  deletePDF,
+  addPDF,
+  editPDF,
+
 };
