@@ -1494,8 +1494,8 @@ const scrape = asyncHandler(async (req,res, next) => {
       console.log(outputData)
       const jsonFormat = JSON.parse(outputData)
       
-      jsonFormat.address = jsonFormat.address.replace(/\n/g, '');
-      jsonFormat.description = jsonFormat.description.replace(/\n/g, '');
+      // jsonFormat.address = jsonFormat.address.replace(/\n/g, '');
+      // jsonFormat.description = jsonFormat.description.replace(/\n/g, '');
 
       const newHotel = new Hotel(jsonFormat)
       const data = await newHotel.save();
