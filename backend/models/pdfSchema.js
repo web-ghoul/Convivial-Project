@@ -4,18 +4,14 @@ const Schema = mongoose.Schema
 
 
 const pdfSchema = Schema({
+  Name: {
+    type : String ,
+    default : ""
+  },
   Hotels: [{
     type: Schema.Types.ObjectId,
     ref: 'hotel', 
   }],
-  FirstHotelName : {
-    type : String , 
-    default : ""
-  },
-  FirstHotelAddress: {
-    type : String , 
-    default : ""
-  },
   CloserName : {
     type : String ,
     default : ""

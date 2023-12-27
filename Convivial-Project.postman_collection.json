@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "9c6b3528-01a5-4bfe-94ca-a0a6181576ce",
+		"name": "Convivial-Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26558607"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "scrape",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/scrape/?site=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"scrape",
+						""
+					],
+					"query": [
+						{
+							"key": "site",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "displayLogs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/displayLogs?page=0&search=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"displayLogs"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "search",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPDF",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"hotels\": [\"658ae91b9d7efe886741187a\" , \"658ae91c9d7efe8867413b0e\" , \"658ae91d9d7efe8867415afb\"],\r\n  \"name\": \"Muse Inn\",\r\n  \"closerName\": \"Jasmine\",\r\n  \"customerName\": \"Amr006\",\r\n  \"customerEmail\": \"amrking006@gmail.com\",\r\n  \"startDate\": \"12-27-2023\",\r\n  \"endDate\": \"12-30-2023\",\r\n  \"agent\": \"Jack\",\r\n  \"agentNumber\": \"01013714763\",\r\n  \"subjectLine\": \"Egypt Cairo\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/addPDF",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addPDF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editPDF",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"hotels\": [\"658ae91b9d7efe8867410f2d\" , \"658ae91c9d7efe8867413b0e\" , \"658ae91d9d7efe8867415afb\"],\r\n  \"name\": \"Muse Inn\",\r\n  \"closerName\": \"Jasmine\",\r\n  \"customerName\": \"Amr007\",\r\n  \"customerEmail\": \"amreducation006@gmail.com\",\r\n  \"startDate\": \"12-27-2023\",\r\n  \"endDate\": \"12-30-2023\",\r\n  \"agent\": \"Jack\",\r\n  \"agentNumber\": \"01013714763\",\r\n  \"subjectLine\": \"Egypt Cairo\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/editPDF/658c37eec6c06dd46f27754e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"editPDF",
+						"658c37eec6c06dd46f27754e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePDF",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/deletePDF/658c3803c6c06dd46f277552",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"deletePDF",
+						"658c3803c6c06dd46f277552"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sendEmail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/sendEmail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"sendEmail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "displayPDF",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/displayPDF/658c37eec6c06dd46f27754e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"displayPDF",
+						"658c37eec6c06dd46f27754e"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

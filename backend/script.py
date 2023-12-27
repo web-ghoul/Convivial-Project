@@ -104,7 +104,8 @@ def scrape_data(urlHotel):
                 "Internet": internet_list,
                 "Services": services_list,
             }
-            print(data)
+            json_data = json.dumps(data, indent=2)
+            print(json_data)
 
 
 if __name__ == "__main__":
