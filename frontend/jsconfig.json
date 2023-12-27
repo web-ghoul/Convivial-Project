@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "jsx":"react-jsx",
+    "target": "es6",
+    "module": "commonjs",
+    "allowJs": true,
+    "checkJs": true,
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["*", "node_modules/@types/*"]
+    }
+  },
+  "include": ["src"]
+}
