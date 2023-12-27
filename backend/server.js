@@ -14,6 +14,7 @@ const cors = require('cors');
 
 
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const protect = require("./middleware/authMiddleware")
 
 const Routes = require('./routes/mainRoutes')
 
@@ -26,6 +27,7 @@ app.use(helmet());
 app.use(bodyParser.json())
 app.use(cors())
 app.use(cookieParser());
+
 
 app.use("/api" ,  Routes)
 

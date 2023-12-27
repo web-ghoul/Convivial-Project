@@ -1,25 +1,30 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
+const asyncHandler = require("express-async-handler");
 
+const protect = asyncHandler(async (req, res, next) => {
+  let token;
 
-const authenticate = (req,res,next) => {
-
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
     try {
-        
-        // console.log("from middleware")
-        let cookieToken = req.cookies.token;
-        
-        //const token = req.headers.authorization.split(' ')[1]
-        const decode = jwt.verify(cookieToken, process.env.SECRET_KEY);
-        
-        
-        return next()
+      token = req.headers.authorization.split(" ")[1];
 
-
-    }catch(error)
-    {
-        res.render('../view/login')
+      //decodes token id
+      const decode = jwt.verify(token, process.env.SECRET_KEY);
+      
+      return next();
+    } catch (error) {
+      res.status(401);
+      throw new Error("Not authorized, token failed");
     }
-    
-}
+  }
 
-module.exports = authenticate
+  if (!token) {
+    res.status(401);
+    throw new Error("Not authorized, no token");
+  }
+});
+
+module.exports = protect;

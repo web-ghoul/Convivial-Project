@@ -1318,7 +1318,7 @@ const displayLogs = asyncHandler(async (req, res, next) => {
     {
       const data = await PDF.find({
         }
-      ,"FirstHotelName CustomerEmail")
+      ,"Name CustomerEmail")
         .sort({ createdAt: -1 })
         .skip(parseInt(page)*20 || 0)
         .limit(20);
@@ -1334,8 +1334,9 @@ const displayLogs = asyncHandler(async (req, res, next) => {
       // .limit(20)
       const data = await PDF.find(
         {
-          name: { $regex: new RegExp(search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i') }
+          Name: { $regex: new RegExp(search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i') }
         },
+        "Name CustomerEmail"
         )
         .limit(20);
       return res.status(200).json({
@@ -1353,10 +1354,10 @@ const displayLogs = asyncHandler(async (req, res, next) => {
 });
 
 const login = asyncHandler(async (req, res, next) => {
-  const { Password } = req.body;
-  //console.log(req.body);
-  if (Password == process.env.SECRET_PASS) {
-    let token = jwt.sign(
+  const { password , userName} = req.body;
+  // console.log(req.body);
+  if (password == process.env.SECRET_PASS && userName == process.env.SECRET_USERNAME) {
+    let token = jwt.sign({},
       process.env.SECRET_KEY,
       {
         expiresIn: "30h",
@@ -1441,11 +1442,18 @@ const searchHotels = asyncHandler(async (req, res, next) => {
 
    
   } else {
-    
+    const data = await Hotel.find({
+    }
+  ,"name")
+    .sort({ createdAt: -1 })
+    .limit(20);
+  return res.status(200).json({
+    data : data 
+  })
   }
 });
 
-const filter = asyncHandler(async (req, res) => {
+const filter = asyncHandler(async (req, res, next) => {
   const { closerName } = req.body;
   const count = await Email.countDocuments({});
 
@@ -1467,64 +1475,63 @@ const filter = asyncHandler(async (req, res) => {
   }
 });
 
-const scrape = asyncHandler(async (req,res) => {
+const scrape = asyncHandler(async (req,res, next) => {
   
-  const { site } = req.query;
-
+  const { site } = req.query; 
+  try{
     exec(`python ./script.py "${site}" `, async(error, stdout, stderr) => {
-        if (error) {
-            console.error(`Error: ${error.message}`);
-            return res.status(500).send('Error occurred while running the script. 1');
-        }
-        if (stderr) {
-            console.error(`Script Error: ${stderr}`);
-            return res.status(500).send('Error occurred while running the script. 2');
-        }
-        // Assuming the script outputs the data you want to store in the database
-        const outputData = stdout.trim(); // Trim any whitespace
-        console.log(outputData)
-        
-        const correctedJsonString = outputData.replace(/'/g, '"');
- 
-        const jsonObject = JSON.parse(correctedJsonString);
-        try{
-          const newHotel = new Hotel(jsonObject)
-          const data = await newHotel.save();
-          return res.status(200).json({
-            data : data
-          })
-        }catch(err)
-        {
-          return res.status(404).json({
-            message : "Error while scraping !"
-          })
-        }
-        
+      if (error) {
+          console.error(`Error: ${error.message}`);
+          return res.status(500).send('Error occurred while running the script. 1');
+      }
+      if (stderr) {
+          console.error(`Script Error: ${stderr}`);
+          return res.status(500).send('Error occurred while running the script. 2');
+      }
+      // Assuming the script outputs the data you want to store in the database
+      try{
+      const outputData = stdout.trim(); // Trim any whitespace
+      console.log(outputData)
+      const jsonFormat = JSON.parse(outputData)
+      
+      // jsonFormat.address = jsonFormat.address.replace(/\n/g, '');
+      // jsonFormat.description = jsonFormat.description.replace(/\n/g, '');
 
-        
-        // Code to store 'outputData' in MongoDB
-        // Insert it into the relevant collection
-        // Example:
-        // YourModel.create({ data: outputData }, (err, result) => {
-        //     if (err) {
-        //         console.error('Error storing data in MongoDB:', err);
-        //         return res.status(500).send('Error storing data in MongoDB.');
-        //     }
-        //     res.send('Data stored successfully in MongoDB.');
-        // });
+      const newHotel = new Hotel(jsonFormat)
+      const data = await newHotel.save();
+      return res.status(200).json({
+        data : data
+      })
+      }catch(err)
+
+      {
+        console.log(err)
+        return res.status(404).json({
+          message : "Error while scraping !"
+        })
+      }
+   
+
     });
+  }catch(err)
+  {
+    return res.status(404).json({
+      message : "Error while scraping !"
+    })
+  }
+  
 
 }
 )
 
-const addPDF = asyncHandler(async (req,res) => {
-    const {hotels , firstHotelName , closerName , customerName , customerEmail ,startDate , endDate , agent , agentNumber , subjectLine} = req.body ;
-    console.log(req.body);
+const addPDF = asyncHandler(async (req,res, next) => {
+    const {hotels , name , closerName , customerName , customerEmail ,startDate , endDate , agent , agentNumber , subjectLine} = req.body ;
+    // console.log(req.body);
     //const newhotels = JSON.parse(hotels);
 
     const newPDF = new PDF({
       Hotels : hotels,
-      FirstHotelName : firstHotelName,
+      Name : name,
       CloserName : closerName,
       CustomerName : customerName,
       CustomerEmail : customerEmail,
@@ -1551,15 +1558,106 @@ const addPDF = asyncHandler(async (req,res) => {
 }
 )
 
-const deletePDF = asyncHandler(async (req,res) => {
+const deletePDF = asyncHandler(async (req,res, next) => {
   
+  try{
+
+    const deletedData = await PDF.deleteOne({_id  : req.params.id})
+    return res.status(200).json({
+      message : "PDF deleted successfully !"
+    })
+  }catch(err)
+  {
+    return res.status(404).json({
+      message : "Error while deleting PDF"
+    })
+  }
 }
 )
 
-const editPDF = asyncHandler(async (req,res) => {
+const displayPDF = asyncHandler(async (req,res, next) => {
   
+  try{
+    const data = await PDF.findById(req.params.id).populate("Hotels")
+
+    return res.status(200).json({
+      data : data
+    })
+
+  }catch(err)
+  {
+    return res.status(404).json({
+      message : "Error while getting data of PDF"
+    })
+  }
 }
 )
+
+const editPDF = asyncHandler(async (req,res, next) => {
+  const {hotels , name , closerName , customerName , customerEmail ,startDate , endDate , agent , agentNumber , subjectLine} = req.body ;
+  // console.log(req.body);
+  //const newhotels = JSON.parse(hotels);
+
+  const updatedData = {
+    Hotels : hotels,
+    Name : name,
+    CloserName : closerName,
+    CustomerName : customerName,
+    CustomerEmail : customerEmail,
+    StartDate : startDate,
+    EndDate : endDate,
+    Agent : agent,
+    AgentNumber : agentNumber,
+    SubjectLine : subjectLine,
+  }
+
+  try{
+    const newUpdatedData = await PDF.findByIdAndUpdate(req.params.id , updatedData , {new : true})
+
+    return res.status(200).json({
+      message : "PDF updated successfully !",
+      data : newUpdatedData ,
+    })
+  }catch(err)
+  {
+    console.log(err)
+    return res.status(404).json({
+      message : "Error while updating PDF"
+    })
+  }
+}
+)
+
+const editHotel = asyncHandler(async (req,res,next) => {
+  
+  //const {name , address  , description} = req.body ;
+
+  try{
+
+    const data = await Hotel.findByIdAndUpdate(req.params.id , req.body , {new : true})
+
+    return res.status(200).json({
+      message : "Hotel updated successfully !",
+      data : data
+    })
+
+  }catch(err)
+  {
+    console.log(err)
+    return res.status(404).json({
+      message : "Error while updating Hotel info"
+    })
+  }
+
+
+
+}
+)
+
+const dataCleansing = () => {
+  
+}
+
 
 module.exports = {
   sendEmail,
@@ -1571,5 +1669,6 @@ module.exports = {
   deletePDF,
   addPDF,
   editPDF,
-
+  displayPDF,
+  editHotel,
 };
