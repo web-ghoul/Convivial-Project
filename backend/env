@@ -1,8 +1,0 @@
-PORT=3000
-DB_CONN=mongodb+srv://hello:zacking@cluster0.5xze9nm.mongodb.net/Convivial?retryWrites=true&w=majority
-AUTH_EMAIL=res@btbintl.com
-AUTH_PASS_APP=3dMn}jg.OsYP
-AUTH_HOST=mail.btbintl.com
-SECRET_KEY=HereWeGoAgain
-SECRET_PASS=findwhatyouloveandletitkillyouAmr&Ghoul&Felo
-SECRET_USERNAME=Amr006

@@ -16,6 +16,7 @@ const SearchForm = ({formik}) => {
           type="text"
           id="search"
           name="search"
+          label={"Search..."}
           value={formik.values.search}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

@@ -2,9 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const getLogs = createAsyncThunk("logs/getLogs",async(args)=>{
-  const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}`)
-  console.log(res)
-  return []
+  const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/displayLogs?page=${args.count}&search=${args.search}`)
+  return res.data.data
 }) 
 
 const initialState = {
@@ -19,7 +18,7 @@ export const logsSlice = createSlice({
    
   },
   extraReducers: (builder) => {
-    builder.addCase(getLogs.pending, (state, { payload }) => {
+    builder.addCase(getLogs.pending, (state) => {
       state.isLoading = true
     })
     builder.addCase(getLogs.fulfilled, (state, { payload }) => {
