@@ -1399,7 +1399,7 @@ const searchHotels = asyncHandler(async (req, res, next) => {
       {
         name: { $regex: new RegExp(search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i') }
       },
- 
+      "name"
     )
     .limit(20);
 
@@ -1455,10 +1455,10 @@ const searchHotels = asyncHandler(async (req, res, next) => {
 
 const filter = asyncHandler(async (req, res, next) => {
   const { closerName } = req.body;
-  const count = await Email.countDocuments({});
+  const count = await PDF.countDocuments({});
 
   if (closerName) {
-    const data = await Email.aggregate([
+    const data = await PDF.aggregate([
       {
         $match: { CloserName: closerName },
       },
@@ -1467,11 +1467,11 @@ const filter = asyncHandler(async (req, res, next) => {
       },
     ]);
 
-    res.render("../view/index.ejs", { data: data,count:Math.ceil(count/10) , page : "0"});
+    
   } else {
-    const data = await Email.find().sort({ createdAt: -1 }).limit(10);
+    const data = await PDF.find().sort({ createdAt: -1 }).limit(20);
     //console.log(data)
-    res.render("../view/index.ejs",{ data: data,count:Math.ceil(count/10) , page : "0"});
+    
   }
 });
 

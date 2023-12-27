@@ -47,6 +47,10 @@ const pdfSchema = Schema({
   SubjectLine : {
     type : String ,
     default : ""
+  },
+  CompanyName : {
+    type : String ,
+    default : ""
   }
   
 },{
