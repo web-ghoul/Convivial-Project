@@ -11,8 +11,26 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\" : \"Amr006\",\r\n    \"password\" : \"findwhatyouloveandletitkillyouAmr&Ghoul&Felo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
 				}
 			},
 			"response": []
@@ -23,7 +41,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/scrape/?site=",
+					"raw": "http://localhost:3000/api/scrape/?site=https://www.booking.com/hotel/ca/sonder-at-the-liberty.en-gb.html?label=bin859jc-1DCAso7AFCP2RvbHBoaW4tcG9pbnQtNDAyYy0yYnItdXBkYXRlZC1jb25kby13aXRoLWhhcmJvci1hbmQtZ3VsZi12aWV3c0gzWANoQ4gBAZgBCbgBF8gBDNgBA-gBAYgCAagCA7gC3POxrAbAAgHSAiQ2MjJjZTJkOC03NTQ4LTQ1YjktYTRhNC0yMmY2OGQ2NTFhY2PYAgTgAgE%26sid=a501d6e639f099c8901b553aaf7883b0%26aid=357028%26ucfs=1%26arphpl=1%26checkin=2024-01-10%26checkout=2024-01-13%26dest_id=-574890%26dest_type=city%26group_adults=2%26req_adults=2%26no_rooms=1%26group_children=0%26req_children=0%26hpos=17%26hapos=17%26sr_order=popularity%26srpvid=1a9988c9c7a902c0%26srepoch=1703705292%26all_sr_blocks=674713404_275781362_2_0_0%26highlighted_blocks=674713404_275781362_2_0_0%26matching_block_id=674713404_275781362_2_0_0%26sr_pri_blocks=674713404_275781362_2_0_0__68333%26from=searchresults%23hotelTmpl",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -37,7 +55,7 @@
 					"query": [
 						{
 							"key": "site",
-							"value": ""
+							"value": "https://www.booking.com/hotel/ca/sonder-at-the-liberty.en-gb.html?label=bin859jc-1DCAso7AFCP2RvbHBoaW4tcG9pbnQtNDAyYy0yYnItdXBkYXRlZC1jb25kby13aXRoLWhhcmJvci1hbmQtZ3VsZi12aWV3c0gzWANoQ4gBAZgBCbgBF8gBDNgBA-gBAYgCAagCA7gC3POxrAbAAgHSAiQ2MjJjZTJkOC03NTQ4LTQ1YjktYTRhNC0yMmY2OGQ2NTFhY2PYAgTgAgE&sid=a501d6e639f099c8901b553aaf7883b0&aid=357028&ucfs=1&arphpl=1&checkin=2024-01-10&checkout=2024-01-13&dest_id=-574890&dest_type=city&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=17&hapos=17&sr_order=popularity&srpvid=1a9988c9c7a902c0&srepoch=1703705292&all_sr_blocks=674713404_275781362_2_0_0&highlighted_blocks=674713404_275781362_2_0_0&matching_block_id=674713404_275781362_2_0_0&sr_pri_blocks=674713404_275781362_2_0_0__68333&from=searchresults#hotelTmpl"
 						}
 					]
 				}
@@ -47,6 +65,16 @@
 		{
 			"name": "displayLogs",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM2OTkyNDEsImV4cCI6MTcwMzgwNzI0MX0.DJkVJ19G7Rq7DNMsv2Cjm1dgXkQYwcqcxO2xd2lVVqk",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -81,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"hotels\": [\"658ae91b9d7efe886741187a\" , \"658ae91c9d7efe8867413b0e\" , \"658ae91d9d7efe8867415afb\"],\r\n  \"name\": \"Muse Inn\",\r\n  \"closerName\": \"Jasmine\",\r\n  \"customerName\": \"Amr006\",\r\n  \"customerEmail\": \"amrking006@gmail.com\",\r\n  \"startDate\": \"12-27-2023\",\r\n  \"endDate\": \"12-30-2023\",\r\n  \"agent\": \"Jack\",\r\n  \"agentNumber\": \"01013714763\",\r\n  \"subjectLine\": \"Egypt Cairo\"\r\n}\r\n",
+					"raw": "{\r\n  \"hotels\": [\"658c7347fb94ea1199fe2800\" , \"658c730efb94ea1199fe27fe\" ],\r\n  \"name\": \"webGhoul\",\r\n  \"closerName\": \"Jasmine\",\r\n  \"customerName\": \"Amr002\",\r\n  \"customerEmail\": \"amrking006@gmail.com\",\r\n  \"startDate\": \"12-27-2023\",\r\n  \"endDate\": \"12-30-2023\",\r\n  \"agent\": \"Jack\",\r\n  \"agentNumber\": \"01013714763\",\r\n  \"subjectLine\": \"Egypt Cairo\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -180,7 +208,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/displayPDF/658c37eec6c06dd46f27754e",
+					"raw": "http://localhost:3000/api/displayPDF/658c769ed21cfb62b715d498",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -189,7 +217,63 @@
 					"path": [
 						"api",
 						"displayPDF",
-						"658c37eec6c06dd46f27754e"
+						"658c769ed21cfb62b715d498"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editHotel",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Great sphinx view hotel\" ,\r\n    \"address\" : \"Gamal abdel nasser street, Giza, 3514502 Cairo, Egypt\" ,\r\n    \"description\" : \"Great sphinx view hotel features free WiFi throughout the property and views of garden in Cairo. Each accommodation at the 3-star hotel has city views, and guests can enjoy access to a garden and to a terrace. The accommodation offers room service, an ATM and currency exchange for guests.\\n\\nAll units in the hotel are fitted with a kettle. The rooms are equipped with air conditioning and a flat-screen TV, and some units at Great sphinx view hotel have a mountain view. All guest rooms will provide guests with a fridge.\\n\\nAt the accommodation you will find a restaurant serving American, Middle Eastern and Pizza cuisine. Vegetarian and halal options can also be requested.\\n\\nThe area is popular for cycling, and car hire is available at Great sphinx view hotel.\\n\\nLanguages spoken at the 24-hour front desk include Arabic, English, Spanish and French.\\n\\nGreat Sphinx is 600 metres from the hotel, while Giza Pyramids is 4.9 km from the property. The nearest airport is Cairo International Airport, 30 km from Great sphinx view hotel.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/editHotel/658c5f781dc1a4876c7ff37b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"editHotel",
+						"658c5f781dc1a4876c7ff37b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchHotels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/searchHotels?search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"searchHotels"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": null
+						}
 					]
 				}
 			},
