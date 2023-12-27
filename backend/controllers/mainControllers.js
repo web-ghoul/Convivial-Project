@@ -1312,14 +1312,39 @@ const sendEmail = asyncHandler(async (req, res, next) => {
 
 const displayLogs = asyncHandler(async (req, res, next) => {
   try {
-    const data = await PDF.find("HotelsName")
-      .sort({ createdAt: -1 })
-      .skip(parseInt(req.query.page)*20 || 0)
-      .limit(20);
-    return res.status(200).json({
-      data : data 
-    })
+    const {search , page} = req.query ;
+
+    if(!search)
+    {
+      const data = await PDF.find({
+        }
+      ,"FirstHotelName CustomerEmail")
+        .sort({ createdAt: -1 })
+        .skip(parseInt(page)*20 || 0)
+        .limit(20);
+      return res.status(200).json({
+        data : data 
+      })
+    }else{
+      // const data = await PDF.find(
+      //   { $text: { $search: search } },
+      //   { score: { $meta: 'textScore' } },
+      // )
+      // .sort({ score: { $meta: 'textScore' } })
+      // .limit(20)
+      const data = await PDF.find(
+        {
+          name: { $regex: new RegExp(search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i') }
+        },
+        )
+        .limit(20);
+      return res.status(200).json({
+        data : data 
+      })
+    }
+    
   } catch (err) {
+    console.log(err)
     //console.log(err);
     return res.status(404).json({
       message: "Error while getting data !",
@@ -1363,18 +1388,26 @@ const searchHotels = asyncHandler(async (req, res, next) => {
   const { search } = req.query;
   if(search){
   try{
+    // const searchData = await Hotel.find(
+    //   { $text: { $search: search } },
+    //   { score: { $meta: 'textScore' } }
+    // )
+    // .sort({ score: { $meta: 'textScore' } })
+    // .limit(20)
     const searchData = await Hotel.find(
-      { $text: { $search: search } },
-      { score: { $meta: 'textScore' } }
+      {
+        name: { $regex: new RegExp(search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i') }
+      },
+ 
     )
-    .sort({ score: { $meta: 'textScore' } })
-    .limit(20)
-    
+    .limit(20);
+
     return res.status(200).json({
       data : searchData
     })
   }catch(err)
   {
+    console.log(err)
     return res.status(404).json({
       message : "Error while searching"
     })
@@ -1438,14 +1471,14 @@ const scrape = asyncHandler(async (req,res) => {
   
   const { site } = req.query;
 
-    exec(`python ./script.py "${site}"`, async(error, stdout, stderr) => {
+    exec(`python ./script.py "${site}" `, async(error, stdout, stderr) => {
         if (error) {
             console.error(`Error: ${error.message}`);
-            return res.status(500).send('Error occurred while running the script.');
+            return res.status(500).send('Error occurred while running the script. 1');
         }
         if (stderr) {
             console.error(`Script Error: ${stderr}`);
-            return res.status(500).send('Error occurred while running the script.');
+            return res.status(500).send('Error occurred while running the script. 2');
         }
         // Assuming the script outputs the data you want to store in the database
         const outputData = stdout.trim(); // Trim any whitespace
@@ -1484,8 +1517,36 @@ const scrape = asyncHandler(async (req,res) => {
 }
 )
 
-const searchLogs = asyncHandler(async (req,res) => {
-  
+const addPDF = asyncHandler(async (req,res) => {
+    const {hotels , firstHotelName , closerName , customerName , customerEmail ,startDate , endDate , agent , agentNumber , subjectLine} = req.body ;
+    console.log(req.body);
+    //const newhotels = JSON.parse(hotels);
+
+    const newPDF = new PDF({
+      Hotels : hotels,
+      FirstHotelName : firstHotelName,
+      CloserName : closerName,
+      CustomerName : customerName,
+      CustomerEmail : customerEmail,
+      StartDate : startDate,
+      EndDate : endDate,
+      Agent : agent,
+      AgentNumber : agentNumber,
+      SubjectLine : subjectLine,
+    })
+
+    try{
+      await newPDF.save();
+      return res.status(200).json({
+        message : "PDF saved successfully !"
+      })
+    }catch(err)
+    {
+      console.log(err)
+      return res.status(404).json({
+        message : "Error while saving PDF"
+      })
+    }
 
 }
 )
@@ -1495,14 +1556,11 @@ const deletePDF = asyncHandler(async (req,res) => {
 }
 )
 
-const addPDF = asyncHandler(async (req,res) => {
-    
-}
-)
 const editPDF = asyncHandler(async (req,res) => {
   
 }
 )
+
 module.exports = {
   sendEmail,
   displayLogs,
@@ -1510,7 +1568,6 @@ module.exports = {
   searchHotels,
   filter,
   scrape,
-  searchLogs,
   deletePDF,
   addPDF,
   editPDF,

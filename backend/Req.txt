@@ -1,0 +1,10 @@
+requests
+lxml
+bs4
+re
+os
+shutil
+gzip
+sys
+json
+argparse

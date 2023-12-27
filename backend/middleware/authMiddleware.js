@@ -5,7 +5,7 @@ const authenticate = (req,res,next) => {
 
     try {
         
-        console.log("from middleware")
+        // console.log("from middleware")
         let cookieToken = req.cookies.token;
         
         //const token = req.headers.authorization.split(' ')[1]

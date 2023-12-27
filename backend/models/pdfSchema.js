@@ -8,36 +8,49 @@ const pdfSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'hotel', 
   }],
-  HotelsName : {
-    type : [String] , 
+  FirstHotelName : {
+    type : String , 
+    default : ""
+  },
+  FirstHotelAddress: {
+    type : String , 
+    default : ""
   },
   CloserName : {
     type : String ,
+    default : ""
   }
   ,
   CustomerName : {
     type : String , 
+    default : ""
   },
   CustomerEmail : {
     type : String , 
+    default : ""
   }
   ,
   StartDate : {
     type : Date ,
+    default : new Date()
   },
   EndDate : {
-    type : Date 
+    type : Date ,
+    default : new Date()
   },
   Agent : {
     type : String , 
+    default : ""
 
   },
   AgentNumber : {
     type : String , 
+    default : ""
 
   },
   SubjectLine : {
     type : String ,
+    default : ""
   }
   
 },{

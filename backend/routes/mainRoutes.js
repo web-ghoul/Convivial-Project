@@ -4,15 +4,18 @@ const controller = require("../controllers/mainControllers")
 const protect = require("../middleware/authMiddleware")
 console.log("Here we are")
 
-router.get("/displayLogs" , protect , controller.displayLogs)
+// router.use(protect);
+router.get("/displayLogs" , controller.displayLogs)
 
-router.post("/sendEmail" ,protect , controller.sendEmail)
+router.post("/sendEmail" , controller.sendEmail)
 
 router.post("/login" , controller.login)
 
 router.get("/searchHotels" , controller.searchHotels)
 
-router.get("/searchLogs" , controller.searchLogs)
+// router.get("/searchLogs" , controller.searchLogs)
+
+router.post("/addPDF" , controller.addPDF);
 
 router.delete("/deletePDF" , )
 
