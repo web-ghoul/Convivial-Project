@@ -1,7 +1,13 @@
+import Forms from "../forms/Forms"
+import { SpecialBox } from "../mui/SpecialBox"
+import LogsSection from "../sections/LogsSection/LogsSection"
 
 const Home = () => {
   return (
-    <div></div>
+    <SpecialBox className="grid jcs aic">
+      <Forms type={"search"} />
+      <LogsSection/>
+    </SpecialBox>
   )
 }
 

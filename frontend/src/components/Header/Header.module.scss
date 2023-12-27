@@ -1,0 +1,10 @@
+@import "../../assets/styles/webGhoul.scss";
+header{
+  background-color: $white !important;
+  box-shadow: $box_shadow_header !important;
+  height: 80px;
+  position: fixed !important;
+  .header_contain{
+
+  }
+}
