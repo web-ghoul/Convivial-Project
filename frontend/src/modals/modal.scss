@@ -1,0 +1,18 @@
+@import "../assets/styles/webGhoul.scss";
+.modal{
+  background-color: $white;
+  min-width: 40vw;
+  outline: none !important;
+
+  @media (max-width:$lg_size) {
+    min-width: 50vw;
+  }
+
+  @media (max-width:$md_size) {
+    min-width: 60vw;
+  }
+
+  @media (max-width:$sm_size) {
+    min-width: auto;
+  }
+}

@@ -1,7 +1,10 @@
+import { Box } from "@mui/material"
+import styles from "./Footer.module.scss"
 
 const Footer = () => {
   return (
-    <div></div>
+    <Box className={`${styles.footer}`}>
+    </Box>
   )
 }
 

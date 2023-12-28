@@ -11,7 +11,7 @@ const LogsSection = () => {
   const dispatch = useDispatch()
   const {logs , isLoading} = useSelector((state)=> state.logs)
   useEffect(()=>{
-    dispatch(getLogs())
+    dispatch(getLogs({count:0,search:""}))
   },[dispatch])
   return (
     <PrimaryBox>

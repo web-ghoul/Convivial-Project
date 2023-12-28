@@ -15,17 +15,29 @@ export const PrimaryButton = styled(Button)(({ theme }) => ({
     backgroundColor: theme.palette.white,
     color: theme.palette.primary.main,
   },
+  "& svg":{
+    fontSize:"26px"
+  },
   [theme.breakpoints.down("lg")]: {
     padding: "6px 16px",
     fontSize: "17px",
+    "& svg":{
+      fontSize:"24px"
+    },
   },
   [theme.breakpoints.down("md")]: {
     padding: "6px 12px",
     fontSize: "16px",
+    "& svg":{
+      fontSize:"22px"
+    },
   },
   [theme.breakpoints.down("sm")]: {
     padding: "5px 10px",
     fontSize: "15px",
+    "& svg":{
+      fontSize:"20px"
+    },
   },
   [theme.breakpoints.down("xs")]: {
     padding: "4px 8px",
