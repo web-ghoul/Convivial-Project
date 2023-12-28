@@ -1,15 +1,25 @@
 import { SearchRounded } from "@mui/icons-material"
-import { Typography } from "@mui/material"
+import { Typography, useMediaQuery } from "@mui/material"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { getLogs } from "store/logsSlice"
+import LoadButton from "../../components/LoadButton/LoadButton"
 import { PrimaryBox } from "../../mui/PrimaryBox"
 import { PrimaryButton } from "../../mui/PrimaryButton"
 import { PrimaryContainer } from "../../mui/PrimaryContainer"
 import { PrimaryTextField } from "../../mui/PrimaryTextField"
-import styles from "./SearchForm.module.scss"
 
-const SearchForm = ({formik}) => {
+const SearchForm = ({loading,formik}) => {
+  const smSize = useMediaQuery("(max-width:768px)")
+  const dispatch =useDispatch()
+
+  useEffect(()=>{
+    dispatch(getLogs({count:0,search:formik.values.search}))
+  },[formik,dispatch])
+  
   return (
-    <PrimaryBox className={`${styles.search}`}>
-      <PrimaryContainer className={`flex jcsb aic g30`}>
+    <PrimaryBox >
+      <PrimaryContainer className={`flex jcsb aic g30 `}>
         <PrimaryTextField
           fullWidth
           variant="outlined"
@@ -23,10 +33,12 @@ const SearchForm = ({formik}) => {
           error={formik.touched.search && Boolean(formik.errors.search)}
           helperText={formik.touched.search && formik.errors.search}
         />
-        <PrimaryButton className={`flex jcc aic g5`}>
-          <SearchRounded/>
-          <Typography variant="h6">Search</Typography>
-        </PrimaryButton>
+        <LoadButton loading={loading}>
+          <PrimaryButton type={"submit"} className={`flex jcc aic g5`}>
+            <SearchRounded/>
+            {!smSize && (<Typography variant="h6">Search</Typography>)}
+          </PrimaryButton>
+        </LoadButton>
       </PrimaryContainer>
     </PrimaryBox>
   )

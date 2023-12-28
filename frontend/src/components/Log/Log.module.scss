@@ -1,0 +1,49 @@
+@import "../../assets/styles/webGhoul.scss";
+.log{
+  position: relative;
+  background-color: $white;
+  transition: $transition !important;
+  border-bottom: 2px solid $white;
+  &:hover{
+    transform: translateY(-5px);
+    border-color: $main;
+    cursor: pointer;
+  }
+  .option_button{
+    svg{
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width:$lg_size) {
+    .option_button{
+      svg{
+        font-size: 28px;
+      }
+    }
+  }
+
+  @media (max-width:$md_size) {
+    .option_button{
+      svg{
+        font-size: 24px;
+      }
+    }
+  }
+
+  @media (max-width:$sm_size) {
+    .option_button{
+      svg{
+        font-size: 22px;
+      }
+    }
+  }
+
+  @media (max-width:$xs_size) {
+    .option_button{
+      svg{
+        font-size: 20px;
+      }
+    }
+  }
+}

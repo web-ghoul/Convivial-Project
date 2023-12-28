@@ -4,7 +4,20 @@ header{
   box-shadow: $box_shadow_header !important;
   height: 80px;
   position: fixed !important;
-  .header_contain{
 
+  @media (max-width:$lg_size) {
+    height: 75px;
+  }
+
+  @media (max-width:$md_size) {
+    height: 70px;
+  }
+
+  @media (max-width:$sm_size) {
+    height: 65px;
+  }
+
+  @media (max-width:$xs_size) {
+    height:60px;
   }
 }

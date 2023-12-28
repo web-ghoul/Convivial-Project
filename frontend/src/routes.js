@@ -1,3 +1,4 @@
+import AddLog from "pages/AddLog";
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
@@ -10,6 +11,10 @@ export const router = createBrowserRouter ([
       {
         index: true,
         element: <Home />
+      },
+      {
+        path:"/add-log",
+        element:<AddLog/>
       }
     ]
   }

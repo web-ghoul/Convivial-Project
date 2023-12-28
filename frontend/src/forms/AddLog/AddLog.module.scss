@@ -1,0 +1,13 @@
+@import "../../assets/styles/webGhoul.scss";
+.add_log_form{
+  box-shadow: $box_shadow;
+  background-color: $white;
+  .tabs{
+    button{
+    }
+  }
+
+  .hotel{
+    grid-template-columns: repeat(2,1fr) !important;
+  }
+}
