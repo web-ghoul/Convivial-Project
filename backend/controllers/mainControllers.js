@@ -1491,7 +1491,7 @@ const scrape = asyncHandler(async (req,res, next) => {
       // Assuming the script outputs the data you want to store in the database
       try{
       const outputData = stdout.trim(); // Trim any whitespace
-      console.log(outputData)
+      // console.log(outputData)
       const jsonFormat = JSON.parse(outputData)
       
       // jsonFormat.address = jsonFormat.address.replace(/\n/g, '');
