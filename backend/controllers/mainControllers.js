@@ -1399,9 +1399,9 @@ const searchHotels = asyncHandler(async (req, res, next) => {
       {
         name: { $regex: new RegExp(search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i') }
       },
-      "name"
+      
     )
-    .limit(20);
+    .limit(10);
 
     return res.status(200).json({
       data : searchData
@@ -1444,7 +1444,7 @@ const searchHotels = asyncHandler(async (req, res, next) => {
   } else {
     const data = await Hotel.find({
     }
-  ,"name")
+  ,)
     .sort({ createdAt: -1 })
     .limit(20);
   return res.status(200).json({
