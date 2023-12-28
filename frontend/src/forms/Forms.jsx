@@ -15,7 +15,7 @@ const server_url = process.env.REACT_APP_SERVER_URL
 const Forms = ({type}) => {
   const [loading , setLoading] = useState(false)
   const dispatch = useDispatch()
-  const {logId, chosenHotels , handleCloseDeleteLogModal} = useContext(AppContext)
+  const {logId , handleCloseDeleteLogModal} = useContext(AppContext)
 
   //Search
   const searchValidationSchema = yup.object({
