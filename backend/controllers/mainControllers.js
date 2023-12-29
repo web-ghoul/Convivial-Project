@@ -52,7 +52,7 @@ const sendEmail = asyncHandler(async (req, res, next) => {
   const mailOption = {
     from: "Business Travel Bureau <res@btbintl.com>", // sender address
     to: customerEmail, // list of receivers
-    subject: "hotels[0].name", // Subject line
+    subject: hotels[0].name, // Subject line
     text: "hello everyBody", // html body
   };
 
