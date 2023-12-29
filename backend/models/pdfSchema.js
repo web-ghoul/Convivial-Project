@@ -11,7 +11,7 @@ const pdfSchema = Schema(
       {
         Id: {
           type: Schema.Types.ObjectId,
-          ref: "Product",
+          ref: "Hotel",
           required: true,
         },
         Price: Number,
@@ -65,4 +65,4 @@ pdfSchema.pre("save", function (next) {
   next();
 });
 
-module.exports = mongoose.model("pdf", pdfSchema);
+module.exports = mongoose.model("Pdf", pdfSchema);
