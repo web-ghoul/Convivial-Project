@@ -38,10 +38,20 @@
 		{
 			"name": "scrape",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM4NjA2ODksImV4cCI6MTcwMzk2ODY4OX0.8chQN8ScSnhnz6z8yxDc1bJgsBIXUAiINFh05eYJijw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/scrape/?site=https://www.booking.com/hotel/ca/sonder-at-the-liberty.en-gb.html?label=bin859jc-1DCAso7AFCP2RvbHBoaW4tcG9pbnQtNDAyYy0yYnItdXBkYXRlZC1jb25kby13aXRoLWhhcmJvci1hbmQtZ3VsZi12aWV3c0gzWANoQ4gBAZgBCbgBF8gBDNgBA-gBAYgCAagCA7gC3POxrAbAAgHSAiQ2MjJjZTJkOC03NTQ4LTQ1YjktYTRhNC0yMmY2OGQ2NTFhY2PYAgTgAgE%26sid=a501d6e639f099c8901b553aaf7883b0%26aid=357028%26ucfs=1%26arphpl=1%26checkin=2024-01-10%26checkout=2024-01-13%26dest_id=-574890%26dest_type=city%26group_adults=2%26req_adults=2%26no_rooms=1%26group_children=0%26req_children=0%26hpos=17%26hapos=17%26sr_order=popularity%26srpvid=1a9988c9c7a902c0%26srepoch=1703705292%26all_sr_blocks=674713404_275781362_2_0_0%26highlighted_blocks=674713404_275781362_2_0_0%26matching_block_id=674713404_275781362_2_0_0%26sr_pri_blocks=674713404_275781362_2_0_0__68333%26from=searchresults%23hotelTmpl",
+					"raw": "http://localhost:3000/api/scrape/?site=https://www.booking.com/hotel/eg/blue-bay-beach.en-gb.html?aid=2369661%26label=msn-0wuZ0McuYFtmhkKWlYu9Xg-80814291883222%3Atikwd-80814466519028%3Aloc-187%3Aneo%3Amte%3Alp187%3Adec%3Aqsbooking.com%26sid=8bc569430acce90431770fd36fe91555%26all_sr_blocks=477456901_170446457_2_0_0;checkin=2024-01-10;checkout=2024-01-13;dest_id=-290263;dest_type=city;dist=0;group_adults=2;group_children=0;hapos=1;highlighted_blocks=477456901_170446457_2_0_0;hpos=1;matching_block_id=477456901_170446457_2_0_0;no_rooms=1;req_adults=2;req_children=0;room1=A%2CA;sb_price_type=total;sr_order=popularity;sr_pri_blocks=477456901_170446457_2_0_0__15000;srepoch=1703793470;srpvid=8a408c5d95f600db;type=total;ucfs=1%26%23hotelTmpl",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -55,7 +65,7 @@
 					"query": [
 						{
 							"key": "site",
-							"value": "https://www.booking.com/hotel/ca/sonder-at-the-liberty.en-gb.html?label=bin859jc-1DCAso7AFCP2RvbHBoaW4tcG9pbnQtNDAyYy0yYnItdXBkYXRlZC1jb25kby13aXRoLWhhcmJvci1hbmQtZ3VsZi12aWV3c0gzWANoQ4gBAZgBCbgBF8gBDNgBA-gBAYgCAagCA7gC3POxrAbAAgHSAiQ2MjJjZTJkOC03NTQ4LTQ1YjktYTRhNC0yMmY2OGQ2NTFhY2PYAgTgAgE&sid=a501d6e639f099c8901b553aaf7883b0&aid=357028&ucfs=1&arphpl=1&checkin=2024-01-10&checkout=2024-01-13&dest_id=-574890&dest_type=city&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=17&hapos=17&sr_order=popularity&srpvid=1a9988c9c7a902c0&srepoch=1703705292&all_sr_blocks=674713404_275781362_2_0_0&highlighted_blocks=674713404_275781362_2_0_0&matching_block_id=674713404_275781362_2_0_0&sr_pri_blocks=674713404_275781362_2_0_0__68333&from=searchresults#hotelTmpl"
+							"value": "https://www.booking.com/hotel/eg/blue-bay-beach.en-gb.html?aid=2369661%26label=msn-0wuZ0McuYFtmhkKWlYu9Xg-80814291883222%3Atikwd-80814466519028%3Aloc-187%3Aneo%3Amte%3Alp187%3Adec%3Aqsbooking.com%26sid=8bc569430acce90431770fd36fe91555%26all_sr_blocks=477456901_170446457_2_0_0;checkin=2024-01-10;checkout=2024-01-13;dest_id=-290263;dest_type=city;dist=0;group_adults=2;group_children=0;hapos=1;highlighted_blocks=477456901_170446457_2_0_0;hpos=1;matching_block_id=477456901_170446457_2_0_0;no_rooms=1;req_adults=2;req_children=0;room1=A%2CA;sb_price_type=total;sr_order=popularity;sr_pri_blocks=477456901_170446457_2_0_0__15000;srepoch=1703793470;srpvid=8a408c5d95f600db;type=total;ucfs=1%26%23hotelTmpl"
 						}
 					]
 				}
@@ -70,7 +80,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM2OTkyNDEsImV4cCI6MTcwMzgwNzI0MX0.DJkVJ19G7Rq7DNMsv2Cjm1dgXkQYwcqcxO2xd2lVVqk",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM4NjA2ODksImV4cCI6MTcwMzk2ODY4OX0.8chQN8ScSnhnz6z8yxDc1bJgsBIXUAiINFh05eYJijw",
 							"type": "string"
 						}
 					]
@@ -105,11 +115,21 @@
 		{
 			"name": "addPDF",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM4NjA2ODksImV4cCI6MTcwMzk2ODY4OX0.8chQN8ScSnhnz6z8yxDc1bJgsBIXUAiINFh05eYJijw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"hotels\": [\"658c7347fb94ea1199fe2800\" , \"658c730efb94ea1199fe27fe\" ],\r\n  \"name\": \"webGhoul\",\r\n  \"closerName\": \"Jasmine\",\r\n  \"customerName\": \"Amr002\",\r\n  \"customerEmail\": \"amrking006@gmail.com\",\r\n  \"startDate\": \"12-27-2023\",\r\n  \"endDate\": \"12-30-2023\",\r\n  \"agent\": \"Jack\",\r\n  \"agentNumber\": \"01013714763\",\r\n  \"subjectLine\": \"Egypt Cairo\"\r\n}\r\n",
+					"raw": "{\r\n  \"hotels\": [{ \"Id\" : \"658ae91c9d7efe8867413f38\" , \"Price\" : 69 },{ \"Id\" :\"658ae91c9d7efe886741318c\" , \"Price\" : 56} ],\r\n  \"name\": \"webGhoul123\",\r\n  \"customerName\": \"Amr002\",\r\n  \"customerEmail\": \"amrking006@gmail.com\",\r\n  \"startDate\": \"12-27-2023\",\r\n  \"endDate\": \"12-30-2023\",\r\n  \"agent\": \"Jack\",\r\n  \"agentNumber\": \"01013714763\",\r\n  \"subjectLine\": \"Egypt Cairo\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -132,61 +152,29 @@
 			"response": []
 		},
 		{
-			"name": "editPDF",
+			"name": "sendEmail",
 			"request": {
-				"method": "PUT",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM4NjA2ODksImV4cCI6MTcwMzk2ODY4OX0.8chQN8ScSnhnz6z8yxDc1bJgsBIXUAiINFh05eYJijw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"hotels\": [\"658ae91b9d7efe8867410f2d\" , \"658ae91c9d7efe8867413b0e\" , \"658ae91d9d7efe8867415afb\"],\r\n  \"name\": \"Muse Inn\",\r\n  \"closerName\": \"Jasmine\",\r\n  \"customerName\": \"Amr007\",\r\n  \"customerEmail\": \"amreducation006@gmail.com\",\r\n  \"startDate\": \"12-27-2023\",\r\n  \"endDate\": \"12-30-2023\",\r\n  \"agent\": \"Jack\",\r\n  \"agentNumber\": \"01013714763\",\r\n  \"subjectLine\": \"Egypt Cairo\"\r\n}\r\n",
+					"raw": "{\r\n  \"hotels\": [{\r\n            \"_id\": \"658dd3a7c19df23acbca31b0\",\r\n            \"name\": \"Blue Bay Beach-Families only\",\r\n            \"address\": \"30 Corneish road, Mostafa Kamel buildings Floor 10, apt 103, 21523 Alexandria, Egypt\",\r\n            \"star_rating\": 4,\r\n            \"photos\": [\r\n                \"https://cf.bstatic.com/xdata/images/hotel/max1024x768/187046675.jpg?k=3120038603a269d653f477ce194c7d8dae72317528a5b7a61e756ba24f13173d&o=&hp=1\",\r\n                \"https://cf.bstatic.com/xdata/images/hotel/max500/282014775.jpg?k=e324714feba3d5cc07e4d0d9844ca6f3fa5c95645ae0e7c76f4b9272d03620eb&o=&hp=1\",\r\n                \"https://cf.bstatic.com/xdata/images/hotel/max500/282014649.jpg?k=c83efcea8a93e18676c3493b7c42e6c632815c949027da86c0c41bf710ab7d7e&o=&hp=1\",\r\n                \"https://cf.bstatic.com/xdata/images/hotel/max300/282014592.jpg?k=d0316230e8ab2da8388866ad5db4cfed35ee795a282ef70c0a0f64fd3ba6c82f&o=&hp=1\",\r\n                \"https://cf.bstatic.com/xdata/images/hotel/max300/276247421.jpg?k=15b5babf8d146183af88155ce90b127837d5cf0095835c446d9775b1c84d5017&o=&hp=1\"\r\n            ],\r\n            \"description\": \"Located in Alexandria, less than 1 km from Stanley Beach and a 12-minute walk from Cleopatra Beach, Blue Bay Beach-Families only provides air-conditioned accommodation with a balcony and free WiFi. It is situated 2 km from Glime Beach and features a lift. Sidi Gaber Railway Station is 1.8 km from the apartment and Alexandria Zoo is 4.1 km away.The spacious apartment is equipped with 2 bedrooms, 2 bathrooms, bed linen, towels, a flat-screen TV with satellite channels, a dining area, a fully equipped kitchen, and a terrace with sea views. Guests can enjoy a meal on an outdoor dining area while overlooking the city views. For added privacy, the accommodation has a private entrance and is protected by full-day security.Catacombs of Kom el Shoqafa is 7.4 km from the apartment, while Stanley Bridge is less than 1 km away. The nearest airport is Borg el Arab International Airport, 52 km from Blue Bay Beach-Families only.\",\r\n            \"Activities\": [\r\n                \"Golf course (within 3 km)\"\r\n            ],\r\n            \"General\": [],\r\n            \"Parking\": [\r\n                \"Free public parking is possible on site (reservation is not needed).\",\r\n                \"Street parking\",\r\n                \"Accessible parking\"\r\n            ],\r\n            \"Internet\": [\r\n                \"WiFi is available in public areas and is free of charge.\"\r\n            ],\r\n            \"Services\": [],\r\n            \"createdAt\": \"2023-12-28T19:59:35.050Z\",\r\n            \"updatedAt\": \"2023-12-28T19:59:35.050Z\",\r\n            \"__v\": 0\r\n        },{\r\n            \"_id\": \"658ae91c9d7efe886741318c\",\r\n            \"name\": \"Gulf Access, Boat Dock, Saltwater Pool, Southern exposure - Villa Blue Bayou - Roelens\",\r\n            \"address\": \"\\nCape Coral, 33914, United States of America\\n\",\r\n            \"star_rating\": 0,\r\n            \"photos\": [\r\n                \"https://cf.bstatic.com/xdata/images/hotel/max1024x768/507953051.jpg?k=96d8d4b2200819bd6f5caf15109066c8975f3e4fe0c0c325d37220fe8e96b407&o=&hp=1\",\r\n                \"https://cf.bstatic.com/xdata/images/hotel/max500/507962387.jpg?k=9f3028e02f5bebf739cf8fd3036d88da3b55af0c7fd23e826cc6109deb0ec051&o=&hp=1\",\r\n                \"https://cf.bstatic.com/xdata/images/hotel/max500/507962376.jpg?k=e93b0aab54657b7f08d472922e705bcddef2847f975c3dada7c6acd62e2cd4c4&o=&hp=1\",\r\n                \"https://cf.bstatic.com/xdata/images/hotel/max300/507962377.jpg?k=92499f53e600170ccdf16f78b4f9c79345d97592fc5f893041a2250a2bda8487&o=&hp=1\",\r\n                \"https://cf.bstatic.com/xdata/images/hotel/max300/507962378.jpg?k=a89e2a8f4753593d3d732a075c860111c58f81847d7e8df99104826d4ed77ce0&o=&hp=1\"\r\n            ],\r\n            \"description\": \"Gulf Access, Boat Dock, Saltwater Pool, Southern exposure - Villa Blue Bayou - Roelens is located in Cape Coral, just 25 miles from Fishermen's Village and 22 miles from Sanibel and Captiva Chamber of Commerce and Visitors Center. This vacation home features air-conditioned accommodations with a patio. Sanibel Lighthouse is 24 miles away and Bailey Matthews Shell Museum is 26 miles from the vacation home.\\n\\nWith free Wifi, this 3-bedroom vacation home offers a cable flat-screen TV, a washing machine, and a fully equipped kitchen with a dishwasher and oven. Guests can take in the views of the pool from the terrace, which also has outdoor furniture. For added privacy, the accommodation features a private entrance.\\n\\nThe nearest airport is Southwest Florida International Airport, 24 miles from the vacation home.\",\r\n            \"Activities\": [\r\n                \"Water park\",\r\n                \"Water sports facilities on site\",\r\n                \"Mini golf\",\r\n                \"Bowling\",\r\n                \"Canoeing\",\r\n                \"Fishing\"\r\n            ],\r\n            \"General\": [],\r\n            \"Parking\": [\r\n                \"Free public parking is available on site (reservation is not possible).\",\r\n                \"Parking garage\",\r\n                \"Accessible parking\"\r\n            ],\r\n            \"Internet\": [\r\n                \"WiFi is available in all areas and is free of charge.\"\r\n            ],\r\n            \"Services\": []\r\n        } ],\r\n  \"customerName\": \"Amr002\",\r\n  \"customerEmail\": \"amreducation006@gmail.com\",\r\n  \"startDate\": \"12-27-2023\",\r\n  \"endDate\": \"12-30-2023\",\r\n  \"agent\": \"Jack\",\r\n  \"agentNumber\": \"01013714763\",\r\n  \"subjectLine\": \"Egypt Cairo\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:3000/api/editPDF/658c37eec6c06dd46f27754e",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"editPDF",
-						"658c37eec6c06dd46f27754e"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deletePDF",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/deletePDF/658c3803c6c06dd46f277552",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"deletePDF",
-						"658c3803c6c06dd46f277552"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "sendEmail",
-			"request": {
-				"method": "POST",
-				"header": [],
 				"url": {
 					"raw": "http://localhost:3000/api/sendEmail",
 					"protocol": "http",
@@ -203,12 +191,93 @@
 			"response": []
 		},
 		{
+			"name": "editPDF",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM4NjA2ODksImV4cCI6MTcwMzk2ODY4OX0.8chQN8ScSnhnz6z8yxDc1bJgsBIXUAiINFh05eYJijw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"hotels\": [{ \"Id\" : \"658ae91c9d7efe8867413f38\" , \"Price\" : 22 },{ \"Id\" :\"658ae91c9d7efe886741318c\" , \"Price\" : 33} ],\r\n  \"name\": \"Muse Inn\",\r\n  \"customerName\": \"Amr007\",\r\n  \"customerEmail\": \"amreducation006@gmail.com\",\r\n  \"startDate\": \"12-27-2023\",\r\n  \"endDate\": \"12-30-2023\",\r\n  \"agent\": \"Jack\",\r\n  \"agentNumber\": \"01013714763\",\r\n  \"subjectLine\": \"Egypt Cairo\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/editPDF/658edb2a24c5f229a3d3ade6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"editPDF",
+						"658edb2a24c5f229a3d3ade6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePDF",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM4NjA2ODksImV4cCI6MTcwMzk2ODY4OX0.8chQN8ScSnhnz6z8yxDc1bJgsBIXUAiINFh05eYJijw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/deletePDF/658ea459923ac88b0d75adb4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"deletePDF",
+						"658ea459923ac88b0d75adb4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "displayPDF",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM4NjA2ODksImV4cCI6MTcwMzk2ODY4OX0.8chQN8ScSnhnz6z8yxDc1bJgsBIXUAiINFh05eYJijw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/displayPDF/658c769ed21cfb62b715d498",
+					"raw": "http://localhost:3000/api/displayPDF/658edb2a24c5f229a3d3ade6",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -217,7 +286,7 @@
 					"path": [
 						"api",
 						"displayPDF",
-						"658c769ed21cfb62b715d498"
+						"658edb2a24c5f229a3d3ade6"
 					]
 				}
 			},
@@ -226,6 +295,16 @@
 		{
 			"name": "editHotel",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM4NjA2ODksImV4cCI6MTcwMzk2ODY4OX0.8chQN8ScSnhnz6z8yxDc1bJgsBIXUAiINFh05eYJijw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
@@ -256,10 +335,20 @@
 		{
 			"name": "searchHotels",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDM4NjA2ODksImV4cCI6MTcwMzk2ODY4OX0.8chQN8ScSnhnz6z8yxDc1bJgsBIXUAiINFh05eYJijw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/searchHotels?search",
+					"raw": "http://localhost:3000/api/searchHotels?search=Blue Bay",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -272,7 +361,7 @@
 					"query": [
 						{
 							"key": "search",
-							"value": null
+							"value": "Blue Bay"
 						}
 					]
 				}

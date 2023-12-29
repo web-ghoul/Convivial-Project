@@ -285,14 +285,13 @@ const scrape = asyncHandler(async (req,res, next) => {
 )
 
 const addPDF = asyncHandler(async (req,res, next) => {
-    const {hotels , name , closerName , customerName , customerEmail ,startDate , endDate , agent , agentNumber , subjectLine} = req.body ;
+    const {hotels , name , customerName , customerEmail ,startDate , endDate , agent , agentNumber , subjectLine} = req.body ;
     // console.log(req.body);
     //const newhotels = JSON.parse(hotels);
 
     const newPDF = new PDF({
       Hotels : hotels,
       Name : name,
-      CloserName : closerName,
       CustomerName : customerName,
       CustomerEmail : customerEmail,
       StartDate : startDate,
@@ -355,14 +354,13 @@ const displayPDF = asyncHandler(async (req,res, next) => {
 )
 
 const editPDF = asyncHandler(async (req,res, next) => {
-  const {hotels , name , closerName , customerName , customerEmail ,startDate , endDate , agent , agentNumber , subjectLine} = req.body ;
+  const {hotels , name , customerName , customerEmail ,startDate , endDate , agent , agentNumber , subjectLine} = req.body ;
   // console.log(req.body);
   //const newhotels = JSON.parse(hotels);
 
   const updatedData = {
     Hotels : hotels,
     Name : name,
-    CloserName : closerName,
     CustomerName : customerName,
     CustomerEmail : customerEmail,
     StartDate : startDate,
