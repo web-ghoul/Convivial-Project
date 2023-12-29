@@ -1,4 +1,4 @@
-import { DeleteRounded, EditRounded } from "@mui/icons-material"
+import { DeleteRounded, DownloadRounded, EditRounded, EmailRounded } from "@mui/icons-material"
 import { Box, IconButton, Paper, Tooltip, Typography } from "@mui/material"
 import { useContext } from "react"
 import { AppContext } from "../../context/AppContext"
@@ -10,10 +10,20 @@ const Log = ({log}) => {
   return (
     <Paper className={`flex jcsb aic g30 pad20 br10 ${styles.log}`}>
       <Typography variant="h5" className="fw700">{log.Name}</Typography>
-      <Box className={`flex jcfe aic g5`}>
+      <Box className={`flex jcfe aic  g5`}>
         <Tooltip title={"Edit"}>
           <IconButton className={`${styles.option_button}`}>
             <EditRounded sx={{color:(theme)=>theme.palette.facebook}} />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title={"Download PDF"}>
+          <IconButton className={`${styles.option_button}`}>
+            <DownloadRounded sx={{color:(theme)=>theme.palette.whatsapp}} />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title={"Email"}>
+          <IconButton className={`${styles.option_button}`}>
+            <EmailRounded sx={{color:(theme)=>theme.palette.yellow}} />
           </IconButton>
         </Tooltip>
         <Tooltip title={"Delete"}>

@@ -50,6 +50,18 @@ const AddLog = ({loading, formik}) => {
           </Box>
 
           <Box className={`pad20 br10 grid jcs aic g30 ${styles.add_log_form}`}>
+            <PrimaryTextField
+              fullWidth
+              variant="outlined"
+              type="text"
+              id="name"
+              name="name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
+            />
             <Box className={`grid jcs aic g10`}>
               <Typography sx={{color:(theme)=>theme.palette.primary.main}} variant="h6">Start Date</Typography>
               <PrimaryTextField
