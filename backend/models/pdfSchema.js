@@ -17,10 +17,6 @@ const pdfSchema = Schema(
         Price: Number,
       },
     ],
-    CloserName: {
-      type: String,
-      default: "",
-    },
     CustomerName: {
       type: String,
       default: "",

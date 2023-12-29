@@ -7,7 +7,7 @@ console.log("Here we are")
 
 router.post("/login" , controller.login)
 
-// router.use(protect);
+router.use(protect);
 
 router.get("/displayLogs" , controller.displayLogs)
 
