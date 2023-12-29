@@ -52,9 +52,8 @@ const sendEmail = asyncHandler(async (req, res, next) => {
   const mailOption = {
     from: "Business Travel Bureau <res@btbintl.com>", // sender address
     to: customerEmail, // list of receivers
-    
-    subject: hotels[0].name, // Subject line
-    text: `hello everyBody`, // html body
+    subject: "hotels[0].name", // Subject line
+    text: "hello everyBody", // html body
   };
 
   transporter.sendMail(mailOption, async (err, info) => {
@@ -339,7 +338,7 @@ const deletePDF = asyncHandler(async (req,res, next) => {
 const displayPDF = asyncHandler(async (req,res, next) => {
   
   try{
-    const data = await PDF.findById(req.params.id).populate("Hotels")
+    const data = await PDF.findById(req.params.id).populate("Hotels.Id")
 
     return res.status(200).json({
       data : data
@@ -347,6 +346,7 @@ const displayPDF = asyncHandler(async (req,res, next) => {
 
   }catch(err)
   {
+    console.log(err)
     return res.status(404).json({
       message : "Error while getting data of PDF"
     })
