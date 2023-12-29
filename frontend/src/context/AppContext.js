@@ -42,21 +42,29 @@ const AppProvider = ({children}) => {
   const handleAddHotel =(hotel,index)=>{
     let isExist  = false
     chosenHotels.map((h,i)=>{
-      if(h && i !== index && hotel._id === h._id){
+      if(h.data && i !== index && (hotel._id === h.data._id || (hotel.name === h.data.name && hotel.address === h.data.address && hotel.description === h.data.description))  ){
         isExist = true
       }
       return ""
     })
     if(!isExist){
-      chosenHotels[index] = hotel
+      chosenHotels[index].data = hotel
       setChosenHotels(chosenHotels)
     }else{
       handleAlert("Hotel is Already Chosen","erorr")
     }
   }
 
+  const handleAddPrice=(price,index)=>{
+    chosenHotels[index].price=price
+  }
+
+  const handleAddLink=(link,index)=>{
+    chosenHotels[index].link=link
+  }
+
   const handleHotelClear=(index)=>{
-    chosenHotels[index] = null
+    chosenHotels[index] = {data:null,price:null}
     setChosenHotels(chosenHotels)
   }
 
@@ -80,14 +88,14 @@ const AppProvider = ({children}) => {
       num = JSON.parse(localStorage.getItem("numberOfHotel"))
     }
     new Array(+num).fill(0).map(()=>{
-      h.push(null)
+      h.push({data:null,price:null ,link:null})
       return 0
     })
     setChosenHotels(h)
   },[numberOfHotel])
 
   return (
-    <AppContext.Provider value={{openChooseNumberOfHotelModal,handleOpenChooseNumberOfHotelModal,numberOfHotel,handleChooseNumberOfHotel,handleCloseChooseNumberOfHotelModal,handleCloseDeleteLogModal,handleOpenDeleteLogModal,openDeleteLogModal,logId,handleAddHotel,chosenHotels,openChooseHotelDialog,handleCloseChooseHotelDialog,handleOpenChooseHotelDialog,hotelIndex,handleHotelClear}}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{openChooseNumberOfHotelModal,handleOpenChooseNumberOfHotelModal,numberOfHotel,handleChooseNumberOfHotel,handleCloseChooseNumberOfHotelModal,handleCloseDeleteLogModal,handleOpenDeleteLogModal,openDeleteLogModal,logId,handleAddHotel,chosenHotels,openChooseHotelDialog,handleCloseChooseHotelDialog,handleOpenChooseHotelDialog,hotelIndex,handleHotelClear,handleAddPrice,handleAddLink}}>{children}</AppContext.Provider>
   )
 }
 

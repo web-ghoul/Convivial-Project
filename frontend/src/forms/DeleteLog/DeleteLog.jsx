@@ -9,7 +9,7 @@ const DeleteLog = ({loading}) => {
   const {handleCloseDeleteLogModal} = useContext(AppContext)
   return (
     <Box className={`grid jcs aic g30`}>
-      <Typography variant="h4" className="tac">Are Sure to Delete Log ?</Typography>
+      <Typography variant="h4" className="tac">Are You Sure to Delete ?</Typography>
       <Box className={`flex jcsb aic g20`}>
         <LoadButton loading={loading}>
           <PrimaryButton type={"submit"} >Delete</PrimaryButton>

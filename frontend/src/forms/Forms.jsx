@@ -3,6 +3,7 @@ import { AppContext } from 'context/AppContext';
 import { useFormik } from 'formik';
 import { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { handleAlert } from '../functions/handleAlert';
 import { getLogs } from '../store/logsSlice';
@@ -15,7 +16,8 @@ const server_url = process.env.REACT_APP_SERVER_URL
 const Forms = ({type}) => {
   const [loading , setLoading] = useState(false)
   const dispatch = useDispatch()
-  const {logId , handleCloseDeleteLogModal} = useContext(AppContext)
+  const {logId,chosenHotels , handleCloseDeleteLogModal} = useContext(AppContext)
+  const navigate = useNavigate()
 
   //Search
   const searchValidationSchema = yup.object({
@@ -39,6 +41,8 @@ const Forms = ({type}) => {
 
   //Add Log
   const addLogValidationSchema = yup.object({
+    name: yup
+    .string('Enter Name').required("Name is Required"),
     startDate: yup
       .string('Enter Start Date').required("Start Date is Required"),
     endDate: yup
@@ -51,6 +55,7 @@ const Forms = ({type}) => {
   });
 
   const addLogInitialValues={
+    name:"",
     startDate:"",
     endDate: "",
     closerName:"",
@@ -63,10 +68,36 @@ const Forms = ({type}) => {
   const addLogFormik = useFormik({
     initialValues: addLogInitialValues,
     validationSchema: addLogValidationSchema,
-    onSubmit: (values) => {
+    onSubmit: async(values,{resetForm}) => {
+      let done=true
+      let hotels = []
+      chosenHotels.map((h ,i)=>{
+        if(h.data === null || h.price === null){
+          if(h.data === null){
+            handleAlert(`Please Choose Hotel ${i+1}`,"error")
+          }
+          if(h.price === null){
+            handleAlert(`Please Choose Hotel Price ${i+1}`,"error")
+          }
+          done=false
+        }else{
+          hotels.push({Id:h.data._id,Price:h.price})
+        }
+        return 0;
+      })
+      if(!done){
+        return
+      }
+      values.hotels = hotels
       setLoading(true)
-      console.log(values)
-      // dispatch(getLogs({count:0,search:values.search}))
+      await axios.post(`${server_url}/addPDF`,values).then((res)=>{
+        handleAlert(res.data.message,"success")
+        resetForm()
+        navigate(`${process.env.REACT_APP_HOME_ROUTE}`)
+        dispatch(getLogs({count:0,search:""}))
+      }).catch((err)=>{
+        handleAlert(err.response.data.message,"success")
+      }) 
       setLoading(false)
     },
   });

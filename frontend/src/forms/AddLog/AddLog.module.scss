@@ -10,4 +10,9 @@
   .hotel{
     grid-template-columns: repeat(2,1fr) !important;
   }
+
+  .pdf_view{
+    height: 100%;
+    grid-template-rows: auto 1fr;
+  }
 }

@@ -1,8 +1,22 @@
 @import "../../assets/styles/webGhoul.scss";
 .hotel_pdf{
   border: 2px solid $main;
-
+  height: 100%;
   .no_chosen{
     color: #ddd;
+  }
+
+  .main_photo_cover{
+    width: 100%;
+    img{
+      width: 100%;
+    }
+  }
+
+  .hotel_photos{
+    grid-template-columns: repeat(2,1fr);
+    img{
+      width: 100%;
+    }
   }
 }
