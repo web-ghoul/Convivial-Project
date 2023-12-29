@@ -59,6 +59,20 @@ const AppProvider = ({children}) => {
     chosenHotels[index].price=price
   }
 
+  const handleReceiveEditableData =(hotels)=>{
+    console.log(hotels)
+    let h = []
+    hotels.map((hotel)=>{
+      console.log(hotel,hotel.Price)
+      let d = {data:hotel.Id , price:hotel.Price}
+      console.log(d)
+      h.push(d)
+      return 0;
+    })
+    console.log(h)
+    setChosenHotels(h)
+  }
+
   const handleAddLink=(link,index)=>{
     chosenHotels[index].link=link
   }
@@ -99,7 +113,7 @@ const AppProvider = ({children}) => {
   },[numberOfHotel])
 
   return (
-    <AppContext.Provider value={{openChooseNumberOfHotelModal,handleOpenChooseNumberOfHotelModal,numberOfHotel,handleChooseNumberOfHotel,handleCloseChooseNumberOfHotelModal,handleCloseDeleteLogModal,handleOpenDeleteLogModal,openDeleteLogModal,logId,handleAddHotel,chosenHotels,openChooseHotelDialog,handleCloseChooseHotelDialog,handleOpenChooseHotelDialog,hotelIndex,handleHotelClear,logData,setLogData,handleAddPrice,handleAddLink}}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{openChooseNumberOfHotelModal,handleOpenChooseNumberOfHotelModal,numberOfHotel,handleChooseNumberOfHotel,handleCloseChooseNumberOfHotelModal,handleCloseDeleteLogModal,handleOpenDeleteLogModal,openDeleteLogModal,logId,handleAddHotel,chosenHotels,openChooseHotelDialog,handleCloseChooseHotelDialog,handleOpenChooseHotelDialog,hotelIndex,handleHotelClear,handleReceiveEditableData,logData,setLogData,handleAddPrice,handleAddLink,}}>{children}</AppContext.Provider>
   )
 }
 

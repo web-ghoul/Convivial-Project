@@ -11,9 +11,10 @@ const Log = ({log}) => {
   const {handleOpenDeleteLogModal} = useContext(AppContext)
   const navigate=useNavigate()
   const dispatch = useDispatch()
+
   const handleEdit = ()=>{
-    navigate(`${process.env.REACT_APP_EDIT_LOG_ROUTE}`)
     dispatch(getLog({id:log._id}))
+    navigate(`${process.env.REACT_APP_EDIT_LOG_ROUTE}`)
   }
 
   const handleViewLog=()=>{

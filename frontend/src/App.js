@@ -6,6 +6,7 @@ import ChooseNumberOfHotelModal from "modals/ChooseNumberOfHotelModal";
 import DeleteLogModal from "modals/DeleteLogModal";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -14,13 +15,17 @@ import { theme } from "./theme";
 function App() {
   const navigate = useNavigate()
   const {pathname} = useLocation()
+  const {isSigned} = useSelector((state)=>state.auth)
 
   useEffect(()=>{
     if(!localStorage.getItem("numberOfHotel") && pathname !== `${process.env.REACT_APP_HOME_ROUTE}`){
       navigate(`${process.env.REACT_APP_HOME_ROUTE}`)
       handleAlert("Choose Number of Hotels","error")
     }
-  },[pathname,navigate])
+    if(isSigned && (pathname === `${process.env.REACT_APP_LOG_ROUTE}` || pathname === `${process.env.REACT_APP_EDIT_LOG_ROUTE}`  || pathname === `${process.env.REACT_APP_ADD_LOG_ROUTE}`  || pathname === `${process.env.REACT_APP_HOME_ROUTE}`)) {
+      navigate(`${process.env.REACT_APP_LOGIN_ROUTE}`)
+    }
+  },[pathname,navigate,isSigned])
 
   return (
     <ThemeProvider theme= {theme}>

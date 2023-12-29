@@ -2,45 +2,49 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab, Typography } from "@mui/material";
 import { AppContext } from "context/AppContext";
 import { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import LoadButton from "../../components/LoadButton/LoadButton";
 import { PrimaryBox } from "../../mui/PrimaryBox";
 import { PrimaryButton } from "../../mui/PrimaryButton";
 import { PrimaryContainer } from "../../mui/PrimaryContainer";
 import { PrimaryTextField } from "../../mui/PrimaryTextField";
-import styles from "./AddLog.module.scss";
+import styles from "./EditLog.module.scss";
 import Hotel from "./Hotel";
+import LoadingEditLog from "./LoadingEditLog";
 
-const AddLog = ({loading, formik}) => {
+const EditLog = ({loading, formik}) => {
   const [value, setValue] = useState("0");
-  const {numberOfHotel , handleChooseNumberOfHotel} = useContext(AppContext)
+  const {handleReceiveEditableData} = useContext(AppContext)
+  const {log,isLoading} =  useSelector((state)=>state.log)
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   
   useEffect(()=>{
-    let num = 0;
-    if(localStorage.getItem("numberOfHotel")){
-      num= JSON.parse(localStorage.getItem("numberOfHotel"))
+    if(log && !isLoading){
+      handleReceiveEditableData(log.Hotels)
     }
-    handleChooseNumberOfHotel(num)
-  },[handleChooseNumberOfHotel])
+  },[log,isLoading])
+
+  console.log(formik)
 
   return (
     <PrimaryBox>
       <PrimaryContainer className={`grid jcs aic g50`}>
-        <Typography variant="h4" className={`tac fw700`}>Add Log</Typography>
-        <Box className={`grid jcs aic g30`}> 
+        <Typography variant="h4" className={`tac fw700`}>Edit Log</Typography>
+        {isLoading ? (<LoadingEditLog/>):(<Box className={`grid jcs aic g30`}> 
           <Box className={` br10 ${styles.add_log_form}`}>
             <TabContext value={value}>
               <TabList value={value} onChange={handleChange} centered className={`${styles.tabs}`}>
                 {
-                  new Array(+numberOfHotel).fill(0).map((_,i)=>(
+                  new Array(+log.Hotels.length).fill(0).map((_,i)=>(
                     <Tab key={i} label={`Hotel ${i+1}`} value={`${i}`}/>
                   ))
                 }
               </TabList>
               {
-                new Array(+numberOfHotel).fill(0).map((_,i)=>(
+                new Array(+log.Hotels.length).fill(0).map((_,i)=>(
                   <TabPanel key={i} value={`${i}`}>
                       <Hotel index={i} />
                   </TabPanel>
@@ -154,10 +158,10 @@ const AddLog = ({loading, formik}) => {
           <LoadButton loading={loading}>
             <PrimaryButton type={"submit"}>Add Log</PrimaryButton>
           </LoadButton>
-        </Box>
+        </Box>)}
       </PrimaryContainer>
     </PrimaryBox>
   )
 }
 
-export default AddLog
+export default EditLog

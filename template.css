@@ -1,0 +1,207 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+
+main .container{
+  display: grid;
+  align-items: center;
+  justify-content: stretch;
+  gap:30px;
+  width: 75vw;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+  padding: 40px;
+}
+
+.logo{
+  width: 200px;
+  height: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+}
+
+.logo img{
+  width: 100%;
+  height: 100%;
+}
+
+.hotels .hotel{
+  display: grid;
+  align-items: center;
+  justify-content: stretch;
+  gap: 30px;
+}
+
+.hotels .hotel .upper_data{
+  background-color: #777;
+  display: grid;
+  align-items: center;
+  justify-content: stretch;
+  color: #fff;
+  padding: 40px 0;
+}
+
+.hotels .hotel .upper_data .hotel_data{
+  background-color: #777;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+.hotels .hotel .upper_data .hotel_data .name{
+  font-weight: 700;
+  text-align: center;
+}
+  
+.hotels .hotel .upper_data .hotel_data .stars{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hotels .hotel .upper_data .hotel_data .stars img{
+  width: 40px;
+}
+
+.hotels .hotel .upper_data .hotel_data .address{
+  text-align: center;
+}
+
+.hotels .hotel .upper_data .main_photo{
+  width: 100%;
+  height: auto;
+}
+
+.hotels .hotel .upper_data .price{
+  text-align: center;
+  font-family: 800;
+  background-color: #555;
+  padding: 20px;
+}
+
+.hotels .hotel .upper_data .description{
+  padding: 20px;
+  text-align: left;
+  line-height: 25px;
+}
+
+.hotels .hotel .upper_data .call_button{
+  background-color: #5676ba;
+  outline: none;
+  border: 2px solid #5676ba;
+  transition: ease-in-out all .3s;
+  color: #fff;
+  padding: 10px 30px;
+  cursor: pointer;
+  width: fit-content;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+  font-size: 20px;
+  border-radius: 4px;
+}
+
+.hotels .hotel .call_button:hover{
+  background-color: #fff;
+  color: #5676ba;
+}
+
+.hotels .hotel .photos{
+  display: grid;
+  align-items: flex-start;
+  justify-content: stretch;
+  gap: 30px;
+  grid-template-columns: repeat(2,1fr);
+}
+
+.hotels .hotel .photos img{
+  width: 100%;
+  height: auto;
+}
+
+.hotels .hotel .infos{
+  color: #fff;
+  background-color: #777;
+  display: grid;
+  align-items: center;
+  justify-content: stretch;
+  grid-template-columns: repeat(2,1fr);
+  gap: 30px;
+  padding: 40px;
+}
+
+.hotels .hotel .infos .info{
+  display: grid;
+  align-items: center;
+  justify-content: stretch;
+  gap: 5px;
+}
+
+.hotels .hotel .infos .info .info_list{
+  padding: 20px;
+}
+
+.hotels .hotel .infos .info  h4{
+  font-weight: 700;
+}
+
+.hotels .hotel hr{
+  border-color:#5676ba ;
+  border-width: 2px;
+}
+
+.footer{
+  display: grid;
+  align-items: center;
+  justify-self: stretch;
+  gap: 30px;
+}
+
+.footer .upper_footer{
+  display: flex ;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer .upper_footer .question{
+  display: grid;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.footer .upper_footer .question .red{
+  color: red;
+}
+
+.footer .upper_footer .question .black{
+  color: black;
+}
+
+.footer .upper_footer button{
+  background-color: #5676ba;
+  outline: none;
+  color: #fff;
+  font-size: 20px;
+  padding: 10px 30px;
+  border-radius: 4px;
+  border: 2px solid #5676ba;
+  transition: ease-in-out all .3s;
+  cursor: pointer;
+}
+
+.footer .upper_footer button:hover{
+  background-color: #fff;
+  color: #5676ba;
+}

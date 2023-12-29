@@ -15,7 +15,10 @@ export const logSlice = createSlice({
   name: 'log',
   initialState,
   reducers: {
-   
+    state:(state)=>{
+    state.log=null
+    state.isLoading=true
+   }
   },
   extraReducers: (builder) => {
     builder.addCase(getLog.pending, (state) => {
@@ -32,5 +35,5 @@ export const logSlice = createSlice({
   },
 })
 
-
+export const {reset} = logSlice.actions
 export default logSlice.reducer
