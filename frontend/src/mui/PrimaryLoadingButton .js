@@ -8,7 +8,7 @@ export const PrimaryLoadingButton = styled(LoadingButton)(({ theme }) => ({
   borderColor: theme.palette.primary.main,
   borderStyle: "solid",
   padding: "22px !important",
-  borderRadius: "30px",
+  borderRadius: "10px",
   boxShadow: "rgba(0, 0, 0, 0.18) 0px 2px 4px;",
   fontFamily: "Cairo",
   "& svg": {
@@ -19,15 +19,19 @@ export const PrimaryLoadingButton = styled(LoadingButton)(({ theme }) => ({
     color: theme.palette.primary.main,
   },
   [theme.breakpoints.down("lg")]: {
+    borderRadius: "9px",
     padding: "18px",
   },
   [theme.breakpoints.down("md")]: {
+    borderRadius: "8px",
     padding: "16px",
   },
   [theme.breakpoints.down("sm")]: {
+    borderRadius: "6px",
     padding: "14px",
   },
   [theme.breakpoints.down("sx")]: {
+    borderRadius: "4px",
     padding: "10px",
   },
 }));

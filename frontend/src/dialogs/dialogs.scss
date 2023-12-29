@@ -3,4 +3,23 @@
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
   max-width: 90vw !important;
   min-width: 40vw !important;
+  width: 40vw;
+
+
+
+  @media (max-width:$lg_size) {
+    width: 60vw;
+  }
+
+  @media (max-width:$md_size) {
+    width: 70vw;
+  }
+
+  @media (max-width:$sm_size) {
+    width: 80vw;
+  }
+
+  @media (max-width:$xs_size) {
+    width: 90vw;
+  }
 }

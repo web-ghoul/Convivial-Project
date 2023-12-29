@@ -81,6 +81,10 @@ const AppProvider = ({children}) => {
     setHotelIndex(index)
   }
 
+  //Edit Log
+  const [logData,setLogData] = useState(null)
+
+
   useEffect(()=>{
     let h = []
     let num=0
@@ -95,7 +99,7 @@ const AppProvider = ({children}) => {
   },[numberOfHotel])
 
   return (
-    <AppContext.Provider value={{openChooseNumberOfHotelModal,handleOpenChooseNumberOfHotelModal,numberOfHotel,handleChooseNumberOfHotel,handleCloseChooseNumberOfHotelModal,handleCloseDeleteLogModal,handleOpenDeleteLogModal,openDeleteLogModal,logId,handleAddHotel,chosenHotels,openChooseHotelDialog,handleCloseChooseHotelDialog,handleOpenChooseHotelDialog,hotelIndex,handleHotelClear,handleAddPrice,handleAddLink}}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{openChooseNumberOfHotelModal,handleOpenChooseNumberOfHotelModal,numberOfHotel,handleChooseNumberOfHotel,handleCloseChooseNumberOfHotelModal,handleCloseDeleteLogModal,handleOpenDeleteLogModal,openDeleteLogModal,logId,handleAddHotel,chosenHotels,openChooseHotelDialog,handleCloseChooseHotelDialog,handleOpenChooseHotelDialog,hotelIndex,handleHotelClear,logData,setLogData,handleAddPrice,handleAddLink}}>{children}</AppContext.Provider>
   )
 }
 

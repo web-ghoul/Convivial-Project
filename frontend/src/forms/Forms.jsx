@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AppContext } from 'context/AppContext';
 import { useFormik } from 'formik';
 import { useContext, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { handleAlert } from '../functions/handleAlert';
@@ -16,6 +16,7 @@ const server_url = process.env.REACT_APP_SERVER_URL
 const Forms = ({type}) => {
   const [loading , setLoading] = useState(false)
   const dispatch = useDispatch()
+  const {log} = useSelector((state)=>state.log)
   const {logId,chosenHotels , handleCloseDeleteLogModal} = useContext(AppContext)
   const navigate = useNavigate()
 
@@ -53,16 +54,16 @@ const Forms = ({type}) => {
     agent:yup.string('Enter Agent Name').required("Agent Name Date is Required"),
     agentNumber:yup.string('Enter Agent Number').required("Agent Number Date is Required"),
   });
-
+  
   const addLogInitialValues={
-    name:"",
-    startDate:"",
-    endDate: "",
-    closerName:"",
-    customerName:"",
-    customerEmail:"",
-    agent:"",
-    agentNumber:"",
+    name:log ? log.Name : "",
+    startDate:log ? new Date(log.StartDate).toISOString().split('T')[0] : "",
+    endDate: log ? new Date(log.EndDate).toISOString().split('T')[0] : "",
+    closerName:log ? log.CloserName : "",
+    customerName:log ? log.CustomerName : "",
+    customerEmail:log ? log.CustomerEmail : "",
+    agent:log ? log.Agent : "",
+    agentNumber:log ? log.AgentNumber : "",
   }
 
   const addLogFormik = useFormik({

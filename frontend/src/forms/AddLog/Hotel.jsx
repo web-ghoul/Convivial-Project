@@ -28,7 +28,7 @@ const Hotel = ({index}) => {
 
   useEffect(()=>{
     handleAddPrice(price,index)
-  },[price])
+  },[price,index,handleAddPrice])
 
   return (
     <Box className={`grid jcs aifs g30 ${styles.hotel}`}>
@@ -56,7 +56,7 @@ const Hotel = ({index}) => {
               id="hotel"
               name="hotel"
               label={"Find a Hotel By Link"}
-              value={link}
+              value={link ?link:""}
               onChange={(e)=>setLink(e.target.value)}
             />
             <LoadButton loading={loading}>
@@ -71,7 +71,7 @@ const Hotel = ({index}) => {
           id="price"
           name="price"
           label={"Hotel Price"}
-          value={price}
+          value={price ? price:""}
           onChange={(e)=>setPrice(e.target.value)}
         />
       </Box>
