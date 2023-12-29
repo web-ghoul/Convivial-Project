@@ -9,7 +9,6 @@ export const getLogs = createAsyncThunk("logs/getLogs",async(args)=>{
       Authorization:`Bearer ${token}`
     }
   })
-  console.log(args,res)
   return res.data
 }) 
 

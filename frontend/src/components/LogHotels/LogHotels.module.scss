@@ -1,0 +1,21 @@
+@import "../../assets/styles/webGhoul.scss";
+.log_hotels{
+  .log_hotels_accordions{
+    grid-template-columns: repeat(2,1fr);
+    .accordion{
+      box-shadow: $box_shadow !important;
+      &:before{
+        opacity: 0 !important;
+      }
+      .hotel_price{
+        color: $main;
+      }
+    }
+  }  
+
+  @media (max-width:$md_size) {
+    .log_hotels_accordions{
+      grid-template-columns: repeat(1,1fr);
+    }  
+  }
+}

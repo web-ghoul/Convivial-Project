@@ -66,7 +66,6 @@ const AppProvider = ({children}) => {
       h.push(d)
       return 0;
     })
-    console.log(h)
     setChosenHotels(h)
   }
 
@@ -116,8 +115,19 @@ const AppProvider = ({children}) => {
     handleResetChosenHotels()
   },[numberOfHotel])
 
+  //Download Log
+  const [openDownloadLogModal,setOpenDownloadLogModal] = useState(false)
+
+  const handleOpenDownloadLogModal=(log)=>{
+    setOpenDownloadLogModal(true)
+  }
+
+  const handleCloseDownloadLogModal=()=>{
+    setOpenDownloadLogModal(false)
+  }
+
   return (
-    <AppContext.Provider value={{openChooseNumberOfHotelModal,handleOpenChooseNumberOfHotelModal,numberOfHotel,handleChooseNumberOfHotel,handleCloseChooseNumberOfHotelModal,handleCloseDeleteLogModal,handleOpenDeleteLogModal,openDeleteLogModal,logId,handleAddHotel,chosenHotels,openChooseHotelDialog,handleCloseChooseHotelDialog,handleOpenChooseHotelDialog,hotelIndex,handleHotelClear,handleReceiveEditableData,logData,setLogData,handleAddPrice,handleAddLink,handleResetChosenHotels,setSearchQuery,searchQuery}}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{openChooseNumberOfHotelModal,handleOpenChooseNumberOfHotelModal,numberOfHotel,handleChooseNumberOfHotel,handleCloseChooseNumberOfHotelModal,handleCloseDeleteLogModal,handleOpenDeleteLogModal,openDeleteLogModal,logId,handleAddHotel,chosenHotels,openChooseHotelDialog,handleCloseChooseHotelDialog,handleOpenChooseHotelDialog,hotelIndex,handleHotelClear,handleReceiveEditableData,logData,setLogData,handleAddPrice,handleAddLink,handleResetChosenHotels,setSearchQuery,searchQuery,openDownloadLogModal,handleOpenDownloadLogModal,handleCloseDownloadLogModal}}>{children}</AppContext.Provider>
   )
 }
 

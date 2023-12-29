@@ -1,6 +1,5 @@
 import { FiberManualRecordRounded, StarRounded } from "@mui/icons-material"
 import { Box, List, ListItem, ListItemText, Typography } from "@mui/material"
-import { LazyLoadImage } from "react-lazy-load-image-component"
 import styles from "./HotelPDF.module.scss"
 
 const HotelPDF = ({hotel,price}) => {
@@ -22,14 +21,17 @@ const HotelPDF = ({hotel,price}) => {
               }
             </Box>
             <Box className={`flex jcc aic ${styles.main_photo_cover}`}>
-              <LazyLoadImage src={hotel.photos[0]} alt={"hotel"} />
+              <img src={hotel.photos[0]} alt={"hotel"} />
             </Box>
-            <Typography variant="h5" className={`tac fw700 flex jcc aic flex_wrap`} >{`Price Per Night : $`}
-            <Typography variant="h5" className={`fw700`} sx={{color:(theme)=>theme.palette.primary.main}}>{price}</Typography></Typography>
+            <Box className={`flex jcc aic flex_wrap`}>
+              <Typography variant="h5" className={`tac fw700`} >{`Price Per Night : $`}
+              </Typography>
+              <Typography variant="h5" className={`fw700`} sx={{color:(theme)=>theme.palette.primary.main}}>{price}</Typography>
+            </Box>
             <Typography variant="h6" sx={{color:(theme)=>theme.palette.gray}} >{hotel.description}</Typography>
             <Box className={`grid jcs aifs g20 ${styles.hotel_photos}`}>
               {hotel.photos.slice(1).map((ph ,i)=>(
-                <LazyLoadImage src={ph} key={i} alt={"hotel photo"} />
+                <img src={ph} key={i} alt={"hotel photo"} />
               ))}
             </Box>
             <Box className={`${styles.infos} grid jcs aifs g10`}>
@@ -39,9 +41,9 @@ const HotelPDF = ({hotel,price}) => {
                   <List className={`${styles.info_list}`}>
                     {
                       hotel.Activities.map((d,i)=>(
-                        <ListItem className={`flex jcc aic g5`}>
+                        <ListItem  key={i} className={`flex jcc aic g5`}>
                           <FiberManualRecordRounded/>
-                          <ListItemText key={i}>{d}</ListItemText>
+                          <ListItemText>{d}</ListItemText>
                         </ListItem>
                       ))
                     }
@@ -54,9 +56,9 @@ const HotelPDF = ({hotel,price}) => {
                   <List className={`${styles.info_list}`}>
                     {
                       hotel.General.map((d,i)=>(
-                        <ListItem className={`flex jcc aic g5`}>
+                        <ListItem key={i} className={`flex jcc aic g5`}>
                           <FiberManualRecordRounded/>
-                          <ListItemText key={i}>{d}</ListItemText>
+                          <ListItemText>{d}</ListItemText>
                         </ListItem>
                       ))
                     }
@@ -69,9 +71,9 @@ const HotelPDF = ({hotel,price}) => {
                   <List className={`${styles.info_list}`}>
                     {
                       hotel.Services.map((d,i)=>(
-                        <ListItem className={`flex jcc aic g5`}>
+                        <ListItem key={i} className={`flex jcc aic g5`}>
                           <FiberManualRecordRounded/>
-                          <ListItemText key={i}>{d}</ListItemText>
+                          <ListItemText>{d}</ListItemText>
                         </ListItem>
                       ))
                     }
@@ -84,9 +86,9 @@ const HotelPDF = ({hotel,price}) => {
                   <List className={`${styles.info_list}`}>
                     {
                       hotel.Internet.map((d,i)=>(
-                        <ListItem className={`flex jcc aic g5`}>
+                        <ListItem key={i} className={`flex jcc aic g5`}>
                           <FiberManualRecordRounded/>
-                          <ListItemText key={i}>{d}</ListItemText>
+                          <ListItemText>{d}</ListItemText>
                         </ListItem>
                       ))
                     }
@@ -99,9 +101,9 @@ const HotelPDF = ({hotel,price}) => {
                   <List className={`${styles.info_list}`}>
                     {
                       hotel.Parking.map((d,i)=>(
-                        <ListItem className={`flex jcc aic g5`}>
+                        <ListItem key={i} className={`flex jcc aic g5`}>
                           <FiberManualRecordRounded/>
-                          <ListItemText key={i}>{d}</ListItemText>
+                          <ListItemText>{d}</ListItemText>
                         </ListItem>
                       ))
                     }

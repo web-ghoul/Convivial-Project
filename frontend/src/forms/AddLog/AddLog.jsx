@@ -63,37 +63,39 @@ const AddLog = ({loading, formik}) => {
               error={formik.touched.name && Boolean(formik.errors.name)}
               helperText={formik.touched.name && formik.errors.name}
             />
-            <Box className={`grid jcs aic g10`}>
-              <Typography sx={{color:(theme)=>theme.palette.primary.main}} variant="h6">Start Date</Typography>
-              <PrimaryTextField
-                fullWidth
-                variant="outlined"
-                type="date"
-                id="startDate"
-                name="startDate"
-                value={formik.values.startDate}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.startDate && Boolean(formik.errors.startDate)}
-                helperText={formik.touched.startDate && formik.errors.startDate}
-              />
+            <Box className={`flex jcsb aic g30 ${styles.md_wrap}`}>
+              <Box className={`grid jcs aic g10`} sx={{width:"100%"}}>
+                <Typography sx={{color:(theme)=>theme.palette.primary.main}} variant="h6">Start Date</Typography>
+                <PrimaryTextField
+                  fullWidth
+                  variant="outlined"
+                  type="date"
+                  id="startDate"
+                  name="startDate"
+                  value={formik.values.startDate}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.startDate && Boolean(formik.errors.startDate)}
+                  helperText={formik.touched.startDate && formik.errors.startDate}
+                />
+              </Box>
+              <Box className={`grid jcs aic g10`} sx={{width:"100%"}}>
+                <Typography sx={{color:(theme)=>theme.palette.primary.main}} variant="h6">End Date</Typography>
+                <PrimaryTextField
+                  fullWidth
+                  variant="outlined"
+                  type="date"
+                  id="endDate"
+                  name="endDate"
+                  value={formik.values.endDate}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.endDate && Boolean(formik.errors.endDate)}
+                  helperText={formik.touched.endDate && formik.errors.endDate}
+                />
+              </Box>
             </Box>
-            <Box className={`grid jcs aic g10`}>
-              <Typography sx={{color:(theme)=>theme.palette.primary.main}} variant="h6">End Date</Typography>
-              <PrimaryTextField
-                fullWidth
-                variant="outlined"
-                type="date"
-                id="endDate"
-                name="endDate"
-                value={formik.values.endDate}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.endDate && Boolean(formik.errors.endDate)}
-                helperText={formik.touched.endDate && formik.errors.endDate}
-              />
-            </Box>
-            <Box className={`flex jcsb aic g30`}>
+            <Box className={`flex jcsb aic g30 ${styles.md_wrap}`}>
               <PrimaryTextField
                 fullWidth
                 variant="outlined"
@@ -121,7 +123,7 @@ const AddLog = ({loading, formik}) => {
                 helperText={formik.touched.customerEmail && formik.errors.customerEmail}
               />
             </Box>
-            <Box className={`flex jcsb aic g30`}>
+            <Box className={`flex jcsb aic g30 ${styles.md_wrap}`}>
               <PrimaryTextField
                 fullWidth
                 variant="outlined"

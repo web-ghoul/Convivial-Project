@@ -45,7 +45,7 @@ const Hotel = ({index}) => {
 
   useEffect(()=>{
     setPrice(chosenHotels[index].price)
-  },[chosenHotels])
+  },[chosenHotels,index])
 
   return (
     <Box className={`grid jcs aifs g30 ${styles.hotel}`}>

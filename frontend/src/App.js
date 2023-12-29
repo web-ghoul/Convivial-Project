@@ -5,6 +5,7 @@ import { handleAlert } from "functions/handleAlert";
 import Cookies from "js-cookie";
 import ChooseNumberOfHotelModal from "modals/ChooseNumberOfHotelModal";
 import DeleteLogModal from "modals/DeleteLogModal";
+import DownloadLogModal from "modals/DownloadLogModal";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,6 +56,7 @@ function App() {
           {/* Modals */}
           <ChooseNumberOfHotelModal/>
           <DeleteLogModal/>
+          <DownloadLogModal/>
           {/* Modals */}
           {/* Dialog */}
           <ChooseHotelDialog/>

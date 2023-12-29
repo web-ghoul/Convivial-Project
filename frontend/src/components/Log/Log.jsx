@@ -8,7 +8,7 @@ import { AppContext } from "../../context/AppContext"
 import styles from "./Log.module.scss"
 
 const Log = ({log}) => {
-  const {handleOpenDeleteLogModal} = useContext(AppContext)
+  const {handleOpenDeleteLogModal,handleOpenDownloadLogModal} = useContext(AppContext)
   const navigate=useNavigate()
   const dispatch = useDispatch()
 
@@ -20,6 +20,12 @@ const Log = ({log}) => {
   const handleViewLog=()=>{
     navigate(`${process.env.REACT_APP_LOG_ROUTE}/${log._id}`)
   }
+
+  const handleDownload =()=>{
+    dispatch(getLog({id:log._id}))
+    handleOpenDownloadLogModal()
+  }
+
   return (
     <Paper className={`grid jcsb aic g30 br10 ${styles.log}`}>
       <Typography onClick={handleViewLog} variant="h5" className="pad20 fw700">{log.Name}</Typography>
@@ -30,7 +36,7 @@ const Log = ({log}) => {
           </IconButton>
         </Tooltip>
         <Tooltip title={"Download PDF"}>
-          <IconButton className={`${styles.option_button}`}>
+          <IconButton onClick={handleDownload} className={`${styles.option_button}`}>
             <DownloadRounded sx={{color:(theme)=>theme.palette.whatsapp}} />
           </IconButton>
         </Tooltip>
