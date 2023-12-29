@@ -3,6 +3,9 @@
   background-color: $white;
   min-width: 40vw;
   outline: none !important;
+  width: 100%;
+  max-width: 90vw;
+  max-height: 90vh;
 
   @media (max-width:$lg_size) {
     min-width: 50vw;

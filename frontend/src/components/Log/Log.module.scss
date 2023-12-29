@@ -4,6 +4,7 @@
   background-color: $white;
   transition: $transition !important;
   border-bottom: 2px solid $white;
+  grid-template-columns: 1fr auto;
   &:hover{
     transform: translateY(-5px);
     border-color: $main;

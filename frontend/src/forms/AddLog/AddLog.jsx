@@ -2,6 +2,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab, Typography } from "@mui/material";
 import { AppContext } from "context/AppContext";
 import { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import LoadButton from "../../components/LoadButton/LoadButton";
 import { PrimaryBox } from "../../mui/PrimaryBox";
 import { PrimaryButton } from "../../mui/PrimaryButton";
@@ -13,6 +14,7 @@ import Hotel from "./Hotel";
 const AddLog = ({loading, formik}) => {
   const [value, setValue] = useState("0");
   const {numberOfHotel , handleChooseNumberOfHotel} = useContext(AppContext)
+  const {log} = useSelector((state)=>state.log)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -23,14 +25,14 @@ const AddLog = ({loading, formik}) => {
       num= JSON.parse(localStorage.getItem("numberOfHotel"))
     }
     handleChooseNumberOfHotel(num)
-  },[])
+  },[handleChooseNumberOfHotel])
 
   return (
     <PrimaryBox>
       <PrimaryContainer className={`grid jcs aic g50`}>
         <Typography variant="h4" className={`tac fw700`}>Add Log</Typography>
         <Box className={`grid jcs aic g30`}> 
-          <Box className={`pad20 br10 ${styles.add_log_form}`}>
+          <Box className={` br10 ${styles.add_log_form}`}>
             <TabContext value={value}>
               <TabList value={value} onChange={handleChange} centered className={`${styles.tabs}`}>
                 {
@@ -56,6 +58,7 @@ const AddLog = ({loading, formik}) => {
               type="text"
               id="name"
               name="name"
+              label={"Name"}
               value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

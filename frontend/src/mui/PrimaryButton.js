@@ -21,6 +21,7 @@ export const PrimaryButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("lg")]: {
     padding: "6px 16px",
     fontSize: "17px",
+    borderRadius: "9px",
     "& svg":{
       fontSize:"24px"
     },
@@ -28,6 +29,7 @@ export const PrimaryButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     padding: "6px 12px",
     fontSize: "16px",
+    borderRadius: "8px",
     "& svg":{
       fontSize:"22px"
     },
@@ -35,6 +37,7 @@ export const PrimaryButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     padding: "5px 10px",
     fontSize: "15px",
+    borderRadius: "6px",
     "& svg":{
       fontSize:"20px"
     },
@@ -42,5 +45,6 @@ export const PrimaryButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("xs")]: {
     padding: "4px 8px",
     fontSize: "14px",
+    borderRadius: "4px",
   },
 }));
