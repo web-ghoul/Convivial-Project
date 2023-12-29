@@ -1,6 +1,7 @@
 import { Box, Divider, Typography } from "@mui/material"
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import HotelPDF from "../../components/HotelPDF/HotelPDF"
 import LoadButton from "../../components/LoadButton/LoadButton"
 import { AppContext } from "../../context/AppContext"
@@ -11,23 +12,35 @@ import styles from "./EditLog.module.scss"
 
 const Hotel = ({index}) => {
   const {chosenHotels,handleAddLink ,handleAddPrice,handleAddHotel, handleOpenChooseHotelDialog} = useContext(AppContext)
+  const {token} = useSelector((state)=>state.auth)
   const [price, setPrice] = useState()
   const [link,setLink] = useState()
   const [loading,setLoading] = useState(false)
 
   const handleFindHotelByLink =async(l)=>{
+    if(!l){
+      handleAlert("Please Enter Hotel Link","error")
+      return
+    }
     setLoading(true)
-    await axios(`${process.env.REACT_APP_SERVER_URL}/scrape/?site=${l}`).then((res)=>{
+    await axios(`${process.env.REACT_APP_SERVER_URL}/scrape/?site=${l}`,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    }).then((res)=>{
       handleAddHotel(res.data.data,index)
       handleAddLink(link,index)
     }).catch((err)=>{
+      console.log(err)
       handleAlert(err.response.data.message,"error")
     })
     setLoading(false)
   }
 
   useEffect(()=>{
-    handleAddPrice(price,index)
+    if(price){
+      handleAddPrice(price,index)
+    }
   },[price,index,handleAddPrice])
 
   useEffect(()=>{

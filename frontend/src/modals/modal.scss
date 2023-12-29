@@ -3,19 +3,23 @@
   background-color: $white;
   min-width: 40vw;
   outline: none !important;
-  width: 100%;
+  width: 40vw;
   max-width: 90vw;
   max-height: 90vh;
 
   @media (max-width:$lg_size) {
-    min-width: 50vw;
+    width: 50vw;
   }
 
   @media (max-width:$md_size) {
-    min-width: 60vw;
+    width: 60vw;
   }
 
   @media (max-width:$sm_size) {
-    min-width: auto;
+    width: 70vw;
+  }
+
+  @media (max-width:$xs_size) {
+    width: 100%;
   }
 }

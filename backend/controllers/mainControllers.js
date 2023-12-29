@@ -82,8 +82,10 @@ const displayLogs = asyncHandler(async (req, res, next) => {
         .sort({ createdAt: -1 })
         .skip(parseInt(page)*20 || 0)
         .limit(20);
+      const totalLogs = await PDF.count()
       return res.status(200).json({
-        data : data 
+        data : data ,
+        totalLogs : totalLogs
       })
     }else{
       // const data = await PDF.find(

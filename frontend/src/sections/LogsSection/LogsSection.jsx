@@ -1,30 +1,33 @@
-import { Box } from "@mui/material"
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { Box, Typography } from "@mui/material"
+import LoadingLog from "components/Log/LoadingLog"
+import Paginate from "components/Paginate/Paginate"
+import { useSelector } from "react-redux"
 import Log from "../../components/Log/Log"
 import { PrimaryBox } from "../../mui/PrimaryBox"
 import { PrimaryContainer } from "../../mui/PrimaryContainer"
-import { getLogs } from "../../store/logsSlice"
-import styles from "./LogsSection.module.scss"
 
 const LogsSection = () => {
-  const dispatch = useDispatch()
-  const {logs , isLoading} = useSelector((state)=> state.logs)
-  useEffect(()=>{
-    dispatch(getLogs({count:0,search:""}))
-  },[dispatch])
+  const {logs,totalLogs , isLoading} = useSelector((state)=> state.logs)
+
   return (
     <PrimaryBox>
       <PrimaryContainer>
-        {
-          isLoading ? (<></>):logs && logs.length > 0 ? (
-            <Box className={`grid jcs aic g30 ${styles.logs}`}>
-              {logs.map((log,i)=>(
-            <Log log={log} key={i}/>
-          ))}
-            </Box>
-          ) :(<></>)
-        }
+        <Box className={`grid jcs aic g50`}>
+          <Box className={`grid jcs aic g30 `}>
+            {
+              isLoading ? (new Array(Math.floor(Math.random()*6)+5).fill(0).map((_,i)=>(
+                <LoadingLog key={i}/>
+              ))):logs && logs.length > 0 ? 
+                logs.map((log,i)=>(
+                  <Log log={log} key={i}/>
+                ))
+              :(<Typography variant="h4" className={`tac`} sx={{color:(theme)=>theme.palette.gray}}>No Logs Yet...</Typography>)
+            }
+          </Box>
+          {
+            totalLogs > 20 &&  <Paginate count={totalLogs%20 +1}/>
+          }
+        </Box>
       </PrimaryContainer>
     </PrimaryBox>
   )

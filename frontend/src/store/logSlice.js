@@ -1,8 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 export const getLog = createAsyncThunk("log/getLog",async(args)=>{
-  const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/displayPDF/${args.id}`)
+  const token = Cookies.get(`${process.env.REACT_APP_TOKEN_COOKIE_NAME}`)
+  const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/displayPDF/${args.id}`,{
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  })
   return res.data.data
 }) 
 

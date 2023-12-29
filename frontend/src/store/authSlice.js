@@ -15,13 +15,17 @@ export const authSlice = createSlice({
       state.token = action.payload.token
       state.userName = action.payload.userName
       state.isSigned = true
-      Cookies.set(`${process.env.REACT_APP_TOKEN_COOKIE_NAME}`,action.payload.token)
-      Cookies.set(`${process.env.REACT_APP_USERNAME_COOKIE_NAME}`,action.payload.userName)
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 30 * 60 * 60 * 1000);
+      Cookies.set(`${process.env.REACT_APP_TOKEN_COOKIE_NAME}`,action.payload.token,{expires})
+      Cookies.set(`${process.env.REACT_APP_USERNAME_COOKIE_NAME}`,action.payload.userName,{expires})
     },
     logout:(state)=>{
       state.token = null
       state.userName = null
       state.isSigned = false
+      Cookies.remove(`${process.env.REACT_APP_TOKEN_COOKIE_NAME}`)
+      Cookies.remove(`${process.env.REACT_APP_USERNAME_COOKIE_NAME}`)
     }
   },
  

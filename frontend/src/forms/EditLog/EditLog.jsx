@@ -20,14 +20,24 @@ const EditLog = ({loading, formik}) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleFormikValues=()=>{
+    formik.values.name=log.Name 
+    formik.values.startDate = new Date(log.StartDate).toISOString().split('T')[0]
+    formik.values.endDate = new Date(log.EndDate).toISOString().split('T')[0] 
+    formik.values.customerName=  log.CustomerName
+    formik.values.customerEmail=log.CustomerEmail
+    formik.values.agent=log.Agent 
+    formik.values.agentNumber = log.AgentNumber
+  }
   
   useEffect(()=>{
     if(log && !isLoading){
       handleReceiveEditableData(log.Hotels)
+      handleFormikValues()
     }
   },[log,isLoading])
 
-  console.log(formik)
 
   return (
     <PrimaryBox>
@@ -156,7 +166,7 @@ const EditLog = ({loading, formik}) => {
           </Box>
 
           <LoadButton loading={loading}>
-            <PrimaryButton type={"submit"}>Add Log</PrimaryButton>
+            <PrimaryButton type={"submit"}>Edit Log</PrimaryButton>
           </LoadButton>
         </Box>)}
       </PrimaryContainer>

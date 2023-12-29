@@ -19,8 +19,9 @@ const server_url = process.env.REACT_APP_SERVER_URL
 const Forms = ({type}) => {
   const [loading , setLoading] = useState(false)
   const dispatch = useDispatch()
-  const {log , isLoading} = useSelector((state)=>state.log)
-  const {logId,chosenHotels , handleCloseDeleteLogModal} = useContext(AppContext)
+  const {token} = useSelector((state)=>state.auth)
+  const {log } = useSelector((state)=>state.log)
+  const {logId,searchQuery,chosenHotels,handleResetChosenHotels , handleCloseDeleteLogModal} = useContext(AppContext)
   const navigate = useNavigate()
 
    //Login
@@ -42,7 +43,7 @@ const Forms = ({type}) => {
     onSubmit: async(values) => {
       setLoading(true)
       await axios.post(`${server_url}/login`,values).then((res)=>{
-        dispatch(login({token:res.data.data.token,userName:res.data.data.userName}))
+        dispatch(login({token:res.data.token,userName:values.userName}))
         handleAlert(res.data.message,"success")
         navigate(`${process.env.REACT_APP_HOME_ROUTE}`)
       }).catch((err)=>{
@@ -67,7 +68,7 @@ const Forms = ({type}) => {
     validationSchema: searchValidationSchema,
     onSubmit: (values) => {
       setLoading(true)
-      dispatch(getLogs({count:0,search:values.search}))
+      dispatch(getLogs({count:0,search:searchQuery}))
       setLoading(false)
     },
   });
@@ -87,13 +88,13 @@ const Forms = ({type}) => {
   });
 
   const addLogInitialValues={
-    name:log ? log.Name : "",
-    startDate:log ? new Date(log.StartDate).toISOString().split('T')[0] : "",
-    endDate: log ? new Date(log.EndDate).toISOString().split('T')[0] : "",
-    customerName:log ? log.CustomerName : "",
-    customerEmail:log ? log.CustomerEmail : "",
-    agent:log ? log.Agent : "",
-    agentNumber:log ? log.AgentNumber : "",
+    name: "",
+    startDate:"",
+    endDate:  "",
+    customerName: "",
+    customerEmail: "",
+    agent: "",
+    agentNumber: "",
   }
 
   const addLogFormik = useFormik({
@@ -121,11 +122,16 @@ const Forms = ({type}) => {
       }
       values.hotels = hotels
       setLoading(true)
-      await axios.post(`${server_url}/addPDF`,values).then((res)=>{
+      await axios.post(`${server_url}/addPDF`,values,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }).then((res)=>{
         handleAlert(res.data.message,"success")
         resetForm()
         navigate(`${process.env.REACT_APP_HOME_ROUTE}`)
-        dispatch(getLogs({count:0,search:""}))
+        dispatch(getLogs({count:0,search:searchQuery}))
+        handleResetChosenHotels()
       }).catch((err)=>{
         handleAlert(err.response.data.message,"success")
       }) 
@@ -133,7 +139,7 @@ const Forms = ({type}) => {
     },
   });
 
-  //Add Log
+  //Edit Log
   const editLogValidationSchema = yup.object({
     name: yup
     .string('Enter Name').required("Name is Required"),
@@ -148,13 +154,13 @@ const Forms = ({type}) => {
   });
 
   const editLogInitialValues={
-    name:!isLoading ? log.Name : "",
-    startDate:!isLoading ? new Date(log.StartDate).toISOString().split('T')[0] : "",
-    endDate: !isLoading ? new Date(log.EndDate).toISOString().split('T')[0] : "",
-    customerName:!isLoading ? log.CustomerName : "",
-    customerEmail:!isLoading ? log.CustomerEmail : "",
-    agent:!isLoading ? log.Agent : "",
-    agentNumber:!isLoading ? log.AgentNumber : "",
+    name: "",
+    startDate:"",
+    endDate:  "",
+    customerName: "",
+    customerEmail: "",
+    agent: "",
+    agentNumber: "",
   }
 
   const editLogFormik = useFormik({
@@ -182,11 +188,15 @@ const Forms = ({type}) => {
       }
       values.hotels = hotels
       setLoading(true)
-      await axios.put(`${server_url}/editPDF`,values).then((res)=>{
+      await axios.put(`${server_url}/editPDF/${log._id}`,values,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }).then((res)=>{
         handleAlert(res.data.message,"success")
         resetForm()
         navigate(`${process.env.REACT_APP_HOME_ROUTE}`)
-        dispatch(getLogs({count:0,search:""}))
+        dispatch(getLogs({count:0,search:searchQuery}))
       }).catch((err)=>{
         handleAlert(err.response.data.message,"success")
       }) 
@@ -198,10 +208,14 @@ const Forms = ({type}) => {
   const handleDeleteLog = async(e)=>{
     e.preventDefault()
     setLoading(true)
-    await axios.delete(`${server_url}/deletePDF/${logId}`).then((res)=>{
+    await axios.delete(`${server_url}/deletePDF/${logId}`,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    }).then((res)=>{
       handleAlert(res.data.message,"success")
       handleCloseDeleteLogModal()
-      dispatch(getLogs({count:0,search:""}))
+      dispatch(getLogs({count:0,search:searchQuery}))
     }).catch((err)=>{
       handleAlert(err.response.data.message,"error")
     })
@@ -209,7 +223,7 @@ const Forms = ({type}) => {
   }
 
   return (
-   <form onSubmit={type === "search" ? searchFormik.handleSubmit :type === "delete_log" ? handleDeleteLog : type === "add_log"? addLogFormik.handleSubmit : type==="login" && loginFormik.handleSubmit} style={{width:"100%"}}> 
+   <form onSubmit={type === "search" ? searchFormik.handleSubmit :type === "delete_log" ? handleDeleteLog : type === "add_log" ? addLogFormik.handleSubmit: type === "edit_log" ? editLogFormik.handleSubmit : type==="login" && loginFormik.handleSubmit} style={{width:"100%"}}> 
     {
       type === "search" ? <SearchForm loading={loading} formik={searchFormik} />  : type ==="delete_log" ? <DeleteLog loading={loading}/> : type === "add_log" ? <AddLog loading={loading} formik={addLogFormik}/> : type === "edit_log" ? <EditLog loading={loading} formik={editLogFormik}/>: type=== "login" && <LoginForm formik={loginFormik} loading={loading} />
     }
