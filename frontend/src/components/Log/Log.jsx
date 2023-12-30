@@ -8,6 +8,21 @@ import { AppContext } from "../../context/AppContext"
 import styles from "./Log.module.scss"
 
 const Log = ({log}) => {
+  const generatePDF = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/generate-pdf');
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'generated.pdf');
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    }
+  };
   const {handleOpenDeleteLogModal,handleOpenDownloadLogModal} = useContext(AppContext)
   const navigate=useNavigate()
   const dispatch = useDispatch()
@@ -50,8 +65,10 @@ const Log = ({log}) => {
             <DeleteRounded sx={{color:(theme)=>theme.palette.youtube}} />
           </IconButton>
         </Tooltip>
+        <button onClick={generatePDF}>Generate PDF</button>
       </Box>
     </Paper>
+    
   )
 }
 

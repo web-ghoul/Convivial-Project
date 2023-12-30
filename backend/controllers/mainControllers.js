@@ -8,6 +8,8 @@ const cookieParser = require("cookie-parser");
 const moment = require("moment");
 const validator = require("validator");
 const { exec } = require('child_process');
+const puppeteer = require('puppeteer');
+const path = require('path');
 
 const transporter = nodemailer.createTransport({
   name: process.env.AUTH_HOST,
@@ -419,6 +421,38 @@ const dataCleansing = () => {
   
 }
 
+const generatePdf = asyncHandler(async (req,res,next) => {
+
+  const data = await PDF.findById(req.params.id);
+  console.log(data)
+
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+
+  // Your HTML content with image source links
+  const htmlContent = `
+    <html>
+      <head><title>Your PDF Title</title></head>
+      <body>
+        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/507953051.jpg?k=96d8d4b2200819bd6f5caf15109066c8975f3e4fe0c0c325d37220fe8e96b407&o=&hp=1" alt="Image">
+        <img src="https://cf.bstatic.com/xdata/images/hotel/max500/507962387.jpg?k=9f3028e02f5bebf739cf8fd3036d88da3b55af0c7fd23e826cc6109deb0ec051&o=&hp=1" alt="Image">
+        <!-- Add other HTML content as needed -->
+      </body>
+    </html>
+  `;
+
+  await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+
+  const pdfBuffer = await page.pdf({ format: 'A4' });
+  await browser.close();
+
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename=generated.pdf');
+  res.send(pdfBuffer);
+  
+}
+)
+
 
 module.exports = {
   sendEmail,
@@ -432,4 +466,5 @@ module.exports = {
   editPDF,
   displayPDF,
   editHotel,
+  generatePdf,
 };
