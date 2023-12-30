@@ -1,7 +1,7 @@
 import { Box, IconButton } from "@mui/material"
 import { LazyLoadImage } from "react-lazy-load-image-component"
 import { useNavigate } from "react-router-dom"
-import logo from "../../assets/images/logo/BTB LOGO COLORED-01.png"
+import logo from "../../assets/images/logo/logo_colored.png"
 import styles from "./Logo.module.scss"
 
 const Logo = () => {

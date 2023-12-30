@@ -25,4 +25,11 @@
       grid-template-columns: repeat(1,1fr) !important;
     }
   }
+ 
+  @media (max-width:$md_size) {
+    .md_wrap{
+      display: grid !important;
+      justify-content: stretch !important;
+    }
+  }
 }

@@ -10,6 +10,7 @@
     border-color: $main;
     cursor: pointer;
   }
+
   .option_button{
     svg{
       font-size: 30px;
@@ -46,5 +47,25 @@
         font-size: 20px;
       }
     }
+  }
+}
+
+.loading_log{
+  height: 100px !important; 
+
+  @media (max-width:$lg_size) {
+    height: 90px !important; 
+  }
+
+  @media (max-width:$md_size) {
+    height: 80px !important; 
+  }
+
+  @media (max-width:$sm_size) {
+    height: 75px !important; 
+  }
+
+  @media (max-width:$xs_size) {
+    height: 70px !important; 
   }
 }

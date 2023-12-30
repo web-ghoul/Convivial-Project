@@ -1,0 +1,83 @@
+@import "../../assets/styles/webGhoul.scss";
+.add_log_form{
+  box-shadow: $box_shadow;
+  background-color: $white;
+
+  .hotel{
+    grid-template-columns: repeat(2,1fr) !important;
+  }
+
+  .pdf_view{
+    height: 100%;
+    grid-template-rows: auto 1fr;
+  }
+
+  @media (max-width:$lg_size) {
+    .tabs{
+      button{
+        min-width: auto !important;
+      }
+    }
+    .hotel{
+      grid-template-columns: repeat(1,1fr) !important;
+    }
+  }
+
+  @media (max-width:$md_size) {
+    .md_wrap{
+      display: grid !important;
+      justify-content: stretch !important;
+    }
+  }
+}
+
+.loading_add_log{
+  .loading_add_log_form{
+    height: 400px;
+  }
+  
+  .loading_add_log_form_button{
+    height: 80px;
+  }
+  
+  @media (max-width:$lg_size) {
+    .loading_add_log_form{
+      height: 350px;
+    }
+    
+    .loading_add_log_form_button{
+      height: 75px;
+    }
+  }
+
+  @media (max-width:$md_size) {
+    .loading_add_log_form{
+      height: 300px;
+    }
+    
+    .loading_add_log_form_button{
+      height: 70px;
+    }
+  }
+
+  @media (max-width:$sm_size) {
+    .loading_add_log_form{
+      height: 250px;
+    }
+    
+    .loading_add_log_form_button{
+      height:65px;
+    }
+  }
+
+  @media (max-width:$xs_size) {
+    .loading_add_log_form{
+      height: 200px;
+    }
+    
+    .loading_add_log_form_button{
+      height: 60px;
+    }
+  }
+}
+

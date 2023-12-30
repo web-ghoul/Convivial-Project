@@ -1,0 +1,11 @@
+@import "../../assets/styles//webGhoul.scss";
+.infos{
+  background-color: $white;
+  box-shadow: $box_shadow;
+  grid-template-columns: repeat(2,1fr);
+  @media (max-width:$md_size) {
+    background-color: $white;
+    box-shadow: $box_shadow;
+    grid-template-columns: repeat(1,1fr);
+  }
+}

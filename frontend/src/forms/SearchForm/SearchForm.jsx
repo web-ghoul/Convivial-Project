@@ -1,6 +1,7 @@
 import { SearchRounded } from "@mui/icons-material"
 import { Typography, useMediaQuery } from "@mui/material"
-import { useEffect } from "react"
+import { AppContext } from "context/AppContext"
+import { useContext, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { getLogs } from "store/logsSlice"
 import LoadButton from "../../components/LoadButton/LoadButton"
@@ -12,9 +13,11 @@ import { PrimaryTextField } from "../../mui/PrimaryTextField"
 const SearchForm = ({loading,formik}) => {
   const smSize = useMediaQuery("(max-width:768px)")
   const dispatch =useDispatch()
+  const {setSearchQuery} = useContext(AppContext)
 
   useEffect(()=>{
     dispatch(getLogs({count:0,search:formik.values.search}))
+    setSearchQuery(formik.values.search)
   },[formik,dispatch])
   
   return (

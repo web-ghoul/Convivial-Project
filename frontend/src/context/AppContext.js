@@ -59,6 +59,16 @@ const AppProvider = ({children}) => {
     chosenHotels[index].price=price
   }
 
+  const handleReceiveEditableData =(hotels)=>{
+    let h = []
+    hotels.map((hotel)=>{
+      let d = {data:hotel.Id , price:hotel.Price}
+      h.push(d)
+      return 0;
+    })
+    setChosenHotels(h)
+  }
+
   const handleAddLink=(link,index)=>{
     chosenHotels[index].link=link
   }
@@ -66,6 +76,19 @@ const AppProvider = ({children}) => {
   const handleHotelClear=(index)=>{
     chosenHotels[index] = {data:null,price:null}
     setChosenHotels(chosenHotels)
+  }
+
+  const handleResetChosenHotels=()=>{
+    let h = []
+    let num=0
+    if(localStorage.getItem("numberOfHotel")){
+      num = JSON.parse(localStorage.getItem("numberOfHotel"))
+    }
+    new Array(+num).fill(0).map(()=>{
+      h.push({data:null,price:null ,link:null})
+      return 0
+    })
+    setChosenHotels(h)
   }
 
   //Choose Hotel
@@ -85,21 +108,26 @@ const AppProvider = ({children}) => {
   const [logData,setLogData] = useState(null)
 
 
+  //Search
+  const [searchQuery,setSearchQuery] = useState("")
+
   useEffect(()=>{
-    let h = []
-    let num=0
-    if(localStorage.getItem("numberOfHotel")){
-      num = JSON.parse(localStorage.getItem("numberOfHotel"))
-    }
-    new Array(+num).fill(0).map(()=>{
-      h.push({data:null,price:null ,link:null})
-      return 0
-    })
-    setChosenHotels(h)
+    handleResetChosenHotels()
   },[numberOfHotel])
 
+  //Download Log
+  const [openDownloadLogModal,setOpenDownloadLogModal] = useState(false)
+
+  const handleOpenDownloadLogModal=(log)=>{
+    setOpenDownloadLogModal(true)
+  }
+
+  const handleCloseDownloadLogModal=()=>{
+    setOpenDownloadLogModal(false)
+  }
+
   return (
-    <AppContext.Provider value={{openChooseNumberOfHotelModal,handleOpenChooseNumberOfHotelModal,numberOfHotel,handleChooseNumberOfHotel,handleCloseChooseNumberOfHotelModal,handleCloseDeleteLogModal,handleOpenDeleteLogModal,openDeleteLogModal,logId,handleAddHotel,chosenHotels,openChooseHotelDialog,handleCloseChooseHotelDialog,handleOpenChooseHotelDialog,hotelIndex,handleHotelClear,logData,setLogData,handleAddPrice,handleAddLink}}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{openChooseNumberOfHotelModal,handleOpenChooseNumberOfHotelModal,numberOfHotel,handleChooseNumberOfHotel,handleCloseChooseNumberOfHotelModal,handleCloseDeleteLogModal,handleOpenDeleteLogModal,openDeleteLogModal,logId,handleAddHotel,chosenHotels,openChooseHotelDialog,handleCloseChooseHotelDialog,handleOpenChooseHotelDialog,hotelIndex,handleHotelClear,handleReceiveEditableData,logData,setLogData,handleAddPrice,handleAddLink,handleResetChosenHotels,setSearchQuery,searchQuery,openDownloadLogModal,handleOpenDownloadLogModal,handleCloseDownloadLogModal}}>{children}</AppContext.Provider>
   )
 }
 

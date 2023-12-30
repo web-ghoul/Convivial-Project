@@ -19,4 +19,16 @@
       width: 100%;
     }
   }
+
+  .infos{
+    grid-template-columns: repeat(2,1fr);
+    .info{
+      .info_list{
+        svg{
+          font-size: 15px;
+          color: $main;
+        }
+      }
+    }
+  }
 }
