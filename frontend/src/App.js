@@ -58,6 +58,7 @@ function App() {
           <DeleteLogModal/>
           <DownloadLogModal/>
           {/* Modals */}
+          
           {/* Dialog */}
           <ChooseHotelDialog/>
           {/* Dialog */}

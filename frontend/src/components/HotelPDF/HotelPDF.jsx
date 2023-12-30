@@ -1,5 +1,6 @@
 import { FiberManualRecordRounded, StarRounded } from "@mui/icons-material"
 import { Box, List, ListItem, ListItemText, Typography } from "@mui/material"
+import { LazyLoadImage } from "react-lazy-load-image-component"
 import styles from "./HotelPDF.module.scss"
 
 const HotelPDF = ({hotel,price}) => {
@@ -21,7 +22,7 @@ const HotelPDF = ({hotel,price}) => {
               }
             </Box>
             <Box className={`flex jcc aic ${styles.main_photo_cover}`}>
-              <img src={hotel.photos[0]} alt={"hotel"} />
+              <LazyLoadImage src={hotel.photos[0]} alt={"hotel"} />
             </Box>
             <Box className={`flex jcc aic flex_wrap`}>
               <Typography variant="h5" className={`tac fw700`} >{`Price Per Night : $`}
@@ -31,7 +32,7 @@ const HotelPDF = ({hotel,price}) => {
             <Typography variant="h6" sx={{color:(theme)=>theme.palette.gray}} >{hotel.description}</Typography>
             <Box className={`grid jcs aifs g20 ${styles.hotel_photos}`}>
               {hotel.photos.slice(1).map((ph ,i)=>(
-                <img src={ph} key={i} alt={"hotel photo"} />
+                <LazyLoadImage src={ph} key={i} alt={"hotel photo"} />
               ))}
             </Box>
             <Box className={`${styles.infos} grid jcs aifs g10`}>

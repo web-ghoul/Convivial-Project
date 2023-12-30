@@ -1,20 +1,41 @@
-import html2pdf from 'html2pdf.js';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import ReactDOM from 'react-dom';
 
-const convertToPdf = (component, fileName, imageUrls) => {
-  const element = React.cloneElement(component, { imageUrls });
-  const htmlContent = ReactDOMServer.renderToString(element);
-  
-  const pdfOptions = {
-    margin: 10,
-    filename: fileName,
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-  };
+const convertToPdf = async (component, fileName) => {
+  const container = document.body.appendChild(document.createElement('div'));
+  ReactDOM.render(component, container);
 
-  const pdf = html2pdf().from(htmlContent).set(pdfOptions).outputPdf();
-  pdf.save();
+  const images = container.querySelectorAll('img');
+  const promises = [];
+
+  images.forEach((img) => {
+    const promise = new Promise((resolve) => {
+      // Create a new Image to handle the online URL
+      const image = new Image();
+      image.onload = resolve;
+      image.onerror = resolve;
+      image.src = img.src; // Set the source to the online URL
+    });
+    promises.push(promise);
+  });
+
+  await Promise.all(promises);
+
+  const canvas = await html2canvas(container, {
+    scale: 2,
+  });
+
+  const pdf = new jsPDF({
+    unit: 'mm',
+    format: 'a4',
+    orientation: 'portrait',
+  });
+
+  const imgData = canvas.toDataURL('image/png');
+  pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+
+  pdf.save(fileName);
 };
 
 export default convertToPdf;

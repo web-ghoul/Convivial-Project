@@ -1,12 +1,10 @@
 import { DownloadRounded } from "@mui/icons-material"
 import { Box, Modal, Skeleton, Typography } from "@mui/material"
-import HotelPDF from "components/HotelPDF/HotelPDF"
 import { AppContext } from "context/AppContext"
-import convertToPdf from "functions/convertToPdf"
 import { DeleteButton } from "mui/DeleteButton"
 import { PrimaryButton } from "mui/PrimaryButton"
 import { PrimaryTextField } from "mui/PrimaryTextField"
-import { useContext, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import "./modal.scss"
 
@@ -14,19 +12,12 @@ const DownloadLogModal = () => {
   const [fileName, setFileName] = useState("BTB_Log")
   const {openDownloadLogModal,handleCloseDownloadLogModal} = useContext(AppContext)
   const {log ,isLoading} = useSelector((state)=>state.log)
+  const componentRef = useRef()
 
   const handleDownload=()=>{
-    let htmlContext = <>
-    {
-      log.Hotels.map((hotel,i)=>(
-        <HotelPDF hotel={hotel.Id} key={i} price={hotel.Price} />
-      ))
-    }
-    </>
-    const imageUrls = log.Hotels.map((hotel) => hotel.Id.photos); 
-
-    convertToPdf(htmlContext,fileName,imageUrls)
+  
   }
+  
   return (
     <Modal
       open={openDownloadLogModal}
@@ -34,7 +25,7 @@ const DownloadLogModal = () => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box className="modal br10 pad20 grid jcs aic g30 center_abs_x_y">
+      <Box ref={componentRef} className="modal br10 pad20 grid jcs aic g30 center_abs_x_y">
         {
           isLoading ? (
             <Skeleton variant="rounded" sx={{ height: "300px" }} />

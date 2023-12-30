@@ -17,7 +17,6 @@ export const LogPage = () => {
   useEffect(()=>{
     dispatch(getLog({id}))
   },[id,dispatch])
-  console.log(log)
   return (
     <SpecialBox>
       <PrimaryBox>
