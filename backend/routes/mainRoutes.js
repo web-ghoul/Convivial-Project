@@ -9,7 +9,7 @@ router.post("/login" , controller.login)
 
 // router.use(protect);
 
-router.get("/generate-pdf" , controller.generatePdf)
+router.get("/generate-pdf/:id" , controller.generatePdf)
 
 router.get("/displayLogs" , controller.displayLogs)
 

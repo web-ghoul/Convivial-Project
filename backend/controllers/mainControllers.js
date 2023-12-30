@@ -422,6 +422,10 @@ const dataCleansing = () => {
 }
 
 const generatePdf = asyncHandler(async (req,res,next) => {
+
+  const data = await PDF.findById(req.params.id);
+  console.log(data)
+
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -430,7 +434,8 @@ const generatePdf = asyncHandler(async (req,res,next) => {
     <html>
       <head><title>Your PDF Title</title></head>
       <body>
-        <img src="http://yourdomain.com/images/your_image.png" alt="Image">
+        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/507953051.jpg?k=96d8d4b2200819bd6f5caf15109066c8975f3e4fe0c0c325d37220fe8e96b407&o=&hp=1" alt="Image">
+        <img src="https://cf.bstatic.com/xdata/images/hotel/max500/507962387.jpg?k=9f3028e02f5bebf739cf8fd3036d88da3b55af0c7fd23e826cc6109deb0ec051&o=&hp=1" alt="Image">
         <!-- Add other HTML content as needed -->
       </body>
     </html>
