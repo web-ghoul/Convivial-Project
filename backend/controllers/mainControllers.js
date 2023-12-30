@@ -8,6 +8,8 @@ const cookieParser = require("cookie-parser");
 const moment = require("moment");
 const validator = require("validator");
 const { exec } = require('child_process');
+const puppeteer = require('puppeteer');
+const path = require('path');
 
 const transporter = nodemailer.createTransport({
   name: process.env.AUTH_HOST,
@@ -417,6 +419,33 @@ const dataCleansing = () => {
   
 }
 
+const generatePdf = asyncHandler(async (req,res,next) => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+
+  // Your HTML content with image source links
+  const htmlContent = `
+    <html>
+      <head><title>Your PDF Title</title></head>
+      <body>
+        <img src="http://yourdomain.com/images/your_image.png" alt="Image">
+        <!-- Add other HTML content as needed -->
+      </body>
+    </html>
+  `;
+
+  await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+
+  const pdfBuffer = await page.pdf({ format: 'A4' });
+  await browser.close();
+
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename=generated.pdf');
+  res.send(pdfBuffer);
+  
+}
+)
+
 
 module.exports = {
   sendEmail,
@@ -430,4 +459,5 @@ module.exports = {
   editPDF,
   displayPDF,
   editHotel,
+  generatePdf,
 };

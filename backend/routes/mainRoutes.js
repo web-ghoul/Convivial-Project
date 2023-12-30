@@ -7,7 +7,9 @@ console.log("Here we are")
 
 router.post("/login" , controller.login)
 
-router.use(protect);
+// router.use(protect);
+
+router.get("/generate-pdf" , controller.generatePdf)
 
 router.get("/displayLogs" , controller.displayLogs)
 

@@ -21,6 +21,7 @@ const Routes = require('./routes/mainRoutes')
 
 
 // setup the logger
+// app.use('/images', express.static(path.join(__dirname, 'path_to_your_images_directory')));
 app.use(express.json()) //can remove
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
